@@ -1,0 +1,36 @@
+$grids-base: (3 5 7);
+
+$breakpoints: (
+	lap
+		"(max-width: 979px) and (min-width: 480px)"
+		(3 5),
+
+	palm
+		"(max-width: 479px)"
+		(3)
+)!default;
+
+$responsive:            true;
+$use-static-classes:    false;
+$use-silent-classes:    true;
+$use-align-horizontal:  true;
+
+@import "compass/reset";
+@import "sorcery-grids";
+
+.set {
+	@extend %sg;
+	@extend %sg--center;
+}
+.set-a {
+	@extend %sg__item;
+	@extend %sg-2-7;
+	@extend %lap--sg-2-5;
+	@extend %palm--sg-1-3;
+}
+.set-b {
+	@extend %sg__item;
+	@extend %sg-3-7;
+	@extend %lap--sg-3-5;
+	@extend %palm--sg-1-3;
+}

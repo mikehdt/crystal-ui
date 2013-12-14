@@ -1,0 +1,63 @@
+* {
+	-webkit-transition: all .5s ease-in-out;
+}
+
+body {
+	font: 300 .8em/1.5 Raleway, Arial, sans-serif;
+	color: #464E59;
+	padding: 1em;
+	
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+h1 {
+	font-size: 3em;
+	font-weight: 400;
+	color: #156091;
+	padding: 2rem 1rem;
+}
+h2 {
+	font-size: 1.5em;
+	font-weight: 400;
+	color: #156091;
+	padding: 1rem;
+}
+h3 {
+	font-size: 1.2em;
+	font-weight: 400;
+	color: #156091;
+	padding: 0 1rem;
+}
+.width-control {
+	position: relative;
+	width: 100%;
+	max-width: 1140px;
+	min-width: 320px;
+	margin: 0 auto;
+}
+.sg, .sg__item, .sg__item p {
+	outline: 1px solid rgba(0,0,0, .1);
+	background: rgba(0,0,0, .05);
+}
+.sg {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.sg .sg {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.sg__item p {
+	font-size: .85em;
+	padding: .5em 1em;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255, .75);
+}
+.sg--gutter-equal, .sg--gutter-equal .sg__item, .sg--gutter-offset, .sg--gutter-offset .sg__item {
+	outline: 1px solid rgba(255,0,0, .1);
+	background: rgba(255,0,0, .05);
+}
+.sg--gutter-equal p, .sg--gutter-offset p {
+	outline: 1px solid rgba(255,0,0, .1);
+	background: rgba(255,0,0, .05);
+}
