@@ -168,7 +168,7 @@ This is handy if you want to lay out your page a certain way visually but it wou
 
 Gutters are highly flexible in Sorcery Grids. You can have them either on or off by default, and you can optionally generate selective guttering classes. Going even further, you can choose to have gutter modifiers to create wider or thinner gutters on the same page. Check out the comments in the grid file for more information.
 
-### Right-aligned grids (`.grid--right{}`)
+### Right-aligned grids (`.sg--right{}`)
 
 If enabled, keep grids in their correct order, but have them flush right instead of left:
 

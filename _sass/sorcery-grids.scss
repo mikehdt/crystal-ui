@@ -1,6 +1,6 @@
 /*!
  * =============================================
- * SORCERY GRIDS 1.0.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.0.1 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
@@ -311,7 +311,7 @@ $_ratios: ();
 			%#{$new-class} {
 				@if $use-static-classes {
 					// Avoid an issue with over-generating classes when both static and silent
-					@extend #{"."+ $base-name + namespace-gen() + $ratio};
+					@extend .#{$base-name + namespace-gen() + $ratio};
 				}
 				@else {
 					@include grid-set-data("%", $base-name, $existing, $offset-type, $percentage);
