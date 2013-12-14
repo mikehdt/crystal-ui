@@ -67,7 +67,7 @@ combinations. A few examples:
     /**
      * Sets an item to be ten twelfths wide only at the desk breakpoint.
      */
-    .desk--sg-10-12 {}
+    .lap--sg-10-12 {}
 
     /**
      * Pulls an item one half of the way to the left only at the palm breakpoint.
@@ -146,7 +146,7 @@ might look like this:
             @extend %sg-1-3;
         }
 
-### Reversed grids (`.grid--rev{}`)
+### Reversed grids (`.sg--rev{}`)
 
 Sorcery, like CSS Wizardy Grids, has the option to reverse a set of grids; this means that the order you write your source and the order it renders are total opposites, for example:
 
