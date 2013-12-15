@@ -17,6 +17,8 @@
 
 Sorcery Grids are compatible with all modern desktop browsers and modern mobile browsers which have support for `display: inline-block;` and CSS *rem* units. Out of the box, the minimum IE supported version is IE9, however it is absolutely possible to bake in IE7/8 support, with use of appropriate polyfills as needed.
 
+Note that at the moment, Android 4.2 and below have issues with the use of white space and REM units. There are some possible workarounds being considered.
+
 ## Demo
 
 Some demo files are included with the system. These are fairly simple for the time being, but it's anticipated they'll grow over time.
