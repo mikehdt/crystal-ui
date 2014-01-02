@@ -5,12 +5,12 @@ $breakpoints: (
 	lap
 		"(max-width: 979px) and (min-width: 480px)"
 		(2 3 4 5)
-		(2 4),
+		(2 4 8),
 		
 	palm
 		"(max-width: 479px)"
 		(2 4)
-		(0)
+		(8)
 );
 
 $use-align-horizontal:  true;
@@ -24,6 +24,8 @@ $gutter-type:           none;
 $use-gutter-widths:     true;
 $use-gutter-equal:      true;
 $use-gutter-offset:     true;
+
+$use-spacing-hack:       true;
 
 @import "compass/reset";
 @import "sorcery-grids";

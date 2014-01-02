@@ -8,7 +8,7 @@
 * Reversible / re-orderable grids
 * With / without gutters
 * Focus on clean, quick, readable code
-* Endless possible combinations -- literally!
+* Endless possible combinations - literally!
 * Generate any ratios you desire, and only generate ones you need
 * Can use Sass @extend-friendly classes to keep your HTML simple
 * No need for `.clear` or `.last` classes
@@ -17,7 +17,13 @@
 
 Sorcery Grids are compatible with all modern desktop browsers and modern mobile browsers which have support for `display: inline-block;` and CSS *rem* units. Out of the box, the minimum IE supported version is IE9, however it is absolutely possible to bake in IE7/8 support, with use of appropriate polyfills as needed.
 
-Note that at the moment, Android 4.2 and below have issues with the use of white space and REM units. There are some possible workarounds being considered.
+Note that at the moment, Android Browser 4.3.x and below have issues with the use of whitespace and REM units. This is resolved as of Android 4.4. There are some possible workarounds if you aren't able to eliminate whitespace in your HTML:
+
+1. There is a config option to enable some imprecision (very minor, a few px at most) into the grids generated. Desktop browsers such as Chrome, Safari and Internet Explorer account for it *mostly* - mobile browsers tend to be most affected in their output. However, this imprecision does negate the need for messing with whitespace.
+2. There is a config option to switch the grids to use floats instead of inline-block, at the expense of some nice features such as vertical alignment or decent guttering. This may be acceptable in many cases.
+3. If you wanted to use JavaScript to sniff for Android devices, you could add in a negative word-spacing (-0.43rem on grid container, normal on grid item) hack. You'd need to use JavaScript as this hack now breaks in Chrome as of version 25.
+
+A future idea could be using flexbox. It's the most promising solution, but would forego many backwards-compatibility needs. There's also the issue of differing levels of support due to the different draft specs. Browser render performance, mostly notably with the older draft specs, may be an important consideration for using flexbox on mobile devices. Though increases in hardware and software in the next two to three years could render performance consisderations entirely negligible for the most part.
 
 ## Demo
 
@@ -102,7 +108,7 @@ It’s as simple as that!
 
 I did feel this was an unfortunate shortcoming of the CSS Wizardry Grids, stemming from the way browsers treat whitespace when using `display: inline-block;`, which is not an issue when using systems that rely on floats. But there are some amazing things you can do with inline blocks that simply cannot be achieved with floats -- vertical alignment of neighbours for example. Or automaitcally centring a set of grid items that aren't taking up the full width.
 
-Sorcery Grids gets around this by using CSS *rem*, or *root em* units. By setting the font size of grid containers to 0, and then resetting grid items to 1rem, white space is effectively negated. No need for blank comments littering your code, and no worries about integrating with a CMS that will create code you may not have precise control over.
+Sorcery Grids gets around this by using CSS *rem*, or *root em* units. By setting the font size of grid containers to 0, and then resetting grid items to 1rem, whitespace is effectively negated. No need for blank comments littering your code, and no worries about integrating with a CMS that will create code you may not have precise control over.
 
 There are some considerations with *rem* units, so just remember that any relative styling you add to a grid item must use either a fixed unit like *px* -- though that isn't recommended -- or *rem* units.
 

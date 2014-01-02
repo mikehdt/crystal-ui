@@ -57,7 +57,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /*!
  * =============================================
- * SORCERY GRIDS 1.0.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
@@ -473,6 +473,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-left: 75%;
   }
 
+  .push--lap--sg-1-8 {
+    margin-left: 12.5%;
+  }
+
+  .push--lap--sg-3-8 {
+    margin-left: 37.5%;
+  }
+
+  .push--lap--sg-5-8 {
+    margin-left: 62.5%;
+  }
+
+  .push--lap--sg-7-8 {
+    margin-left: 87.5%;
+  }
+
   .pull--lap--sg-1-2 {
     margin-right: 50%;
   }
@@ -483,6 +499,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   .pull--lap--sg-3-4 {
     margin-right: 75%;
+  }
+
+  .pull--lap--sg-1-8 {
+    margin-right: 12.5%;
+  }
+
+  .pull--lap--sg-3-8 {
+    margin-right: 37.5%;
+  }
+
+  .pull--lap--sg-5-8 {
+    margin-right: 62.5%;
+  }
+
+  .pull--lap--sg-7-8 {
+    margin-right: 87.5%;
   }
 
   .shift--lap--sg-1-2 {
@@ -497,6 +529,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     left: 75%;
   }
 
+  .shift--lap--sg-1-8 {
+    left: 12.5%;
+  }
+
+  .shift--lap--sg-3-8 {
+    left: 37.5%;
+  }
+
+  .shift--lap--sg-5-8 {
+    left: 62.5%;
+  }
+
+  .shift--lap--sg-7-8 {
+    left: 87.5%;
+  }
+
   .unshift--lap--sg-1-2 {
     right: 50%;
   }
@@ -507,5 +555,135 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
   .unshift--lap--sg-3-4 {
     right: 75%;
+  }
+
+  .unshift--lap--sg-1-8 {
+    right: 12.5%;
+  }
+
+  .unshift--lap--sg-3-8 {
+    right: 37.5%;
+  }
+
+  .unshift--lap--sg-5-8 {
+    right: 62.5%;
+  }
+
+  .unshift--lap--sg-7-8 {
+    right: 87.5%;
+  }
+}
+/* Offset: palm */
+@media (max-width: 479px) {
+  .push--palm--sg-1-8 {
+    margin-left: 12.5%;
+  }
+
+  .push--palm--sg-2-8 {
+    margin-left: 25%;
+  }
+
+  .push--palm--sg-3-8 {
+    margin-left: 37.5%;
+  }
+
+  .push--palm--sg-4-8 {
+    margin-left: 50%;
+  }
+
+  .push--palm--sg-5-8 {
+    margin-left: 62.5%;
+  }
+
+  .push--palm--sg-6-8 {
+    margin-left: 75%;
+  }
+
+  .push--palm--sg-7-8 {
+    margin-left: 87.5%;
+  }
+
+  .pull--palm--sg-1-8 {
+    margin-right: 12.5%;
+  }
+
+  .pull--palm--sg-2-8 {
+    margin-right: 25%;
+  }
+
+  .pull--palm--sg-3-8 {
+    margin-right: 37.5%;
+  }
+
+  .pull--palm--sg-4-8 {
+    margin-right: 50%;
+  }
+
+  .pull--palm--sg-5-8 {
+    margin-right: 62.5%;
+  }
+
+  .pull--palm--sg-6-8 {
+    margin-right: 75%;
+  }
+
+  .pull--palm--sg-7-8 {
+    margin-right: 87.5%;
+  }
+
+  .shift--palm--sg-1-8 {
+    left: 12.5%;
+  }
+
+  .shift--palm--sg-2-8 {
+    left: 25%;
+  }
+
+  .shift--palm--sg-3-8 {
+    left: 37.5%;
+  }
+
+  .shift--palm--sg-4-8 {
+    left: 50%;
+  }
+
+  .shift--palm--sg-5-8 {
+    left: 62.5%;
+  }
+
+  .shift--palm--sg-6-8 {
+    left: 75%;
+  }
+
+  .shift--palm--sg-7-8 {
+    left: 87.5%;
+  }
+
+  .unshift--palm--sg-1-8 {
+    right: 12.5%;
+  }
+
+  .unshift--palm--sg-2-8 {
+    right: 25%;
+  }
+
+  .unshift--palm--sg-3-8 {
+    right: 37.5%;
+  }
+
+  .unshift--palm--sg-4-8 {
+    right: 50%;
+  }
+
+  .unshift--palm--sg-5-8 {
+    right: 62.5%;
+  }
+
+  .unshift--palm--sg-6-8 {
+    right: 75%;
+  }
+
+  .unshift--palm--sg-7-8 {
+    right: 87.5%;
   }
 }

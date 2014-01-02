@@ -1,6 +1,6 @@
 /*!
  * =============================================
- * SORCERY GRIDS 1.0.1 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
@@ -94,29 +94,32 @@ $breakpoints: (
 // 14. The namespace of the grid system
 // 15. Whether to use the namespace for grid names or not
 // 16. Set to true for ratios as names, false for ratios as numbers
+// 17. Use an imprecision hack for Android < 4.4 inline-blocks and whitespace
+// 18. Forego the full feature set (vertical align, guttering) and use floats
 
-$responsive:            true!default;	// [1]
-$mobile-first:          false!default;	// [2]
-$ignore-duplicates:     true!default;	// [3]
-$use-static-classes:    true!default;	// [4]
-$use-silent-classes:    false!default;	// [5]
-$use-align-horizontal:  false!default;	// [6]
-$use-align-vertical:    false!default;	// [7]
-$use-reversible:        false!default;	// [8]
-$use-push:              false!default;	// [9]
-$use-pull:              false!default;	// [9]
-$use-shift:             false!default;	// [9]
-$use-unshift:           false!default;	// [9]
-$gutter:                1rem!default;	// [10]
-$gutter-type:           equal!default;	// [11]
-$use-gutter-widths:     false!default;	// [12]
-$use-gutter-none:       false!default;	// [13]
-$use-gutter-equal:      false!default;	// [13]
-$use-gutter-offset:     false!default;	// [13]
-$namespace:             sg!default;		// [14]
-$use-grid-namespace:    true!default;	// [15]
-$use-ratio-names:       false!default;	// [16]
-
+$responsive:            true!default;   // [1]
+$mobile-first:          false!default;  // [2]
+$ignore-duplicates:     true!default;   // [3]
+$use-static-classes:    true!default;   // [4]
+$use-silent-classes:    false!default;  // [5]
+$use-align-horizontal:  false!default;  // [6]
+$use-align-vertical:    false!default;  // [7]
+$use-reversible:        false!default;  // [8]
+$use-push:              false!default;  // [9]
+$use-pull:              false!default;  // [9]
+$use-shift:             false!default;  // [9]
+$use-unshift:           false!default;  // [9]
+$gutter:                1rem!default;   // [10]
+$gutter-type:           equal!default;  // [11]
+$use-gutter-widths:     false!default;  // [12]
+$use-gutter-none:       false!default;  // [13]
+$use-gutter-equal:      false!default;  // [13]
+$use-gutter-offset:     false!default;  // [13]
+$namespace:             sg!default;     // [14]
+$use-grid-namespace:    true!default;   // [15]
+$use-ratio-names:       false!default;  // [16]
+$use-imprecision-hack:  false!default;  // [17]
+$use-float-hack:        false!default;  // [18]
 
 
 
@@ -145,6 +148,11 @@ $use-ratio-names:       false!default;	// [16]
 
 $_percentages: ();
 $_ratios: ();
+$_imprecision: 0;
+
+@if $use-imprecision-hack {
+	$_imprecision: -0.00001;
+}
 
 // Note: Names used in the logic are a breakpoint for the whole structure,
 // media-query, grid-set and modifier-set.
@@ -262,7 +270,7 @@ $_ratios: ();
 	// Only generate if we need to have 100% wide unit classes
 	@if $mobile-first == false {
 		#{class-gen($cur-breakpoint + namespace-gen() + ratio-gen(1, 1))} {
-			width: 100%;
+			width: 100% + $_imprecision;
 		}
 	}
 
@@ -334,7 +342,7 @@ $_ratios: ();
 	@else if $existing == false {
 		@if $offset-type == "" {
 			// Create a new class value and store the new values
-			width: $percentage;
+			width: $percentage + $_imprecision;
 		}
 		@else {
 			// Create a new class value and store the new values
@@ -396,12 +404,25 @@ $_ratios: ();
 // Generate gutters, either equal or offset.
 
 @mixin new-gutter ($cur-gutter:$gutter, $cur-type:$gutter-type) {
-	display: block;
+	@if $use-float-hack {
+		float: none;
+
+		// Clear the container as it's no longer floated
+		&::after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+	}
+	@else {
+		display: block;
+	}
+
 	width: auto;
 
 	@if $cur-type == "equal" {
-		margin-left:  (-$cur-gutter / 2);
-		margin-right: (-$cur-gutter / 2);
+		margin-left:  -$cur-gutter / 2;
+		margin-right: -$cur-gutter / 2;
 	}
 	@else if $cur-type == "offset" {
 		margin-left: -$cur-gutter;
@@ -414,8 +435,8 @@ $_ratios: ();
 
 	#{class-gen($namespace +"__item", "> ")} {
 		@if $cur-type == "equal" {
-			padding-left:  ($cur-gutter / 2);
-			padding-right: ($cur-gutter / 2);
+			padding-left:  $cur-gutter / 2;
+			padding-right: $cur-gutter / 2;
 		}
 		@else if $cur-type == "offset" {
 			padding-left: $cur-gutter;
@@ -470,6 +491,11 @@ $_ratios: ();
 // Also as it says on the tin
 
 @mixin align-vertical ($align-type) {
+	// Sanity check
+	@if $use-float-hack {
+		@warn "Floats are enabled, which are not compatible with vertical alignment modifiers";
+	}
+
 	// Due to the way Sass optimises things it seems, children being inside is
 	// necessary to avoid issues when both class types are enabled.
 	#{class-gen($namespace +"--"+ $align-type)} {
@@ -503,13 +529,19 @@ $_ratios: ();
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+
 #{class-gen($namespace)} {
 	// If we are using guttering by default, include it here
 	@if $gutter-type != none {
 		@include new-gutter();
 	}
 	@else {
-		display: inline-block;
+		@if $use-float-hack {
+			float: left;
+		}
+		@else {
+			display: inline-block;
+		}
 	}
 
 	width: 100%;
@@ -517,16 +549,29 @@ $_ratios: ();
 	font-size: 0;
 
 	#{class-gen($namespace, "> ")} {
-		display: inline-block;
+		@if $use-float-hack {
+			float: left;
+		}
+		@else {
+			display: inline-block;
+		}
+
 		margin: 0;
 	}
 }
+
 #{class-gen($namespace +"__item")} {
-	display: inline-block;
+	@if $use-float-hack {
+		float: left;
+	}
+	@else {
+		display: inline-block;
+	}
+
 	font-size: 1rem;
 
 	@if $mobile-first {
-		width: 100%;
+		width: 100% + $_imprecision;
 	}
 }
 
@@ -556,18 +601,30 @@ $_ratios: ();
 // Modifiers: Reverse
 @if $use-reversible {
 	#{class-gen($namespace +"--rev")} {
-		direction: rtl;
-		text-align: left;
-
-		#{class-gen($namespace, "> ")},
-		#{class-gen($namespace +"__item", "> ")} {
-			direction: ltr;
+		@if $use-float-hack == false {
+			direction: rtl;
 			text-align: left;
 		}
 
+		#{class-gen($namespace, "> ")},
+		#{class-gen($namespace +"__item", "> ")} {
+			@if $use-float-hack {
+				float: right;
+			}
+			@else {
+				direction: ltr;
+				text-align: left;
+			}
+		}
+
 		#{class-gen($namespace +"--rev", "> ")} {
-			direction: rtl;
-			text-align: left;
+			@if $use-float-hack {
+				float: left;
+			}
+			@else {
+				direction: rtl;
+				text-align: left;
+			}
 		}
 	}
 }
@@ -575,6 +632,11 @@ $_ratios: ();
 // -----------------
 // Grid System Grids
 // -----------------
+
+// Check for conflicting hacks
+@if ($use-imprecision-hack and $use-float-hack) {
+	@warn "More than one hack is enabled; choose one only";
+}
 
 // Generate our regular grid classes, which are not inside a media query
 /* Grid: base */
