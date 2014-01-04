@@ -39,7 +39,7 @@ Sorcery Grids is simple to implement and its classes are human-readable. You can
 
 Setting up the breakpoints is probably the most complex part, so check out the demos to see how they work. Unlike CSS Wizardry Grids where the available ratios are halves, thirds, quarters, fifths, sixths, eighths, tenths and twelfths, Sorcery Grids has a logic core that lets you dynamically generate any ratio sets you want. Feel like sevenths? Let it make them for you. Want to use seventeenths for some reason? Nothing stopping you. Also unlike CSS Wizardry Grids, Sorcery Grids will only generate those ratio sets you request. Keeps things neat.
 
-I find that when developing, using static classes straight in HTML is a fast way to prototype, but I also later might want to consolidate things down using silent classes. Whether static or silent, the tradeoff is either complexity in HTML, or complexity in CSS. However when you want to swap, if it's either static OR silent, you have to change all your `.names` to `%names`, a tedious process. Sorcery Grids lets you get around this by developing initially with static, having both static and silent turned on as you go, and then later you can just turn off static generation to keep your resulting code clean.
+I find that when developing, using static classes straight in HTML is a fast way to prototype, but I also later might want to consolidate things down using silent classes. Whether static or silent, the tradeoff is either complexity in HTML, or complexity in CSS. However when you want to swap, if it's either static OR silent, you have to change all your `.names` to `%names`, a tedious process. Sorcery Grids lets you get around this by developing initially with static in HTML, setting up silent `@extend` classes as you go, by having both static and silent turned on. Then later you can just turn off static generation to keep your resulting HTML code clean.
 
 An area where the grid system does differ in behaviour from CSS Wizardry Grids is in the push and pull classes. In CSS Wizardry Grids, push and pull use CSS left and right, whereas in Sorcery that results in margin-left and margin-right. If you need left and right offsetting, the shift and unshift modifiers will be what you're after (That seemed the most appropriate name for them).
 
@@ -47,7 +47,7 @@ There are also some differences in how nesting is approached, as well as gutteri
 
 ### Patterns
 
-Sorcery Grid classes are based on [a modified BEM
+Sorcery Grids' classes are based on [a modified BEM
 syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) with a slight bending of the rules when using numeric fractions, to keep name complexity to a minimum.
 
 * `.sg` is a **B**lock
@@ -65,7 +65,7 @@ combinations. A few examples:
     /**
      * Sets an item to be one half across all breakpoints.
      */
-    .sg-1-2-half {}
+    .sg-1-2 {}
 
     /**
      * Pushes an item one third of the way to the right across all breakpoints.
@@ -73,7 +73,7 @@ combinations. A few examples:
     .push--sg-1-3 {}
 
     /**
-     * Sets an item to be ten twelfths wide only at the desk breakpoint.
+     * Sets an item to be ten twelfths wide only at the lap breakpoint.
      */
     .lap--sg-10-12 {}
 
@@ -104,13 +104,15 @@ It’s as simple as that!
 
 ---
 
-**No need for empty HTML comments!** 
+**No need for empty HTML comments! (With a few caveats)** 
 
-I did feel this was an unfortunate shortcoming of the CSS Wizardry Grids, stemming from the way browsers treat whitespace when using `display: inline-block;`, which is not an issue when using systems that rely on floats. But there are some amazing things you can do with inline blocks that simply cannot be achieved with floats -- vertical alignment of neighbours for example. Or automaitcally centring a set of grid items that aren't taking up the full width.
+I did feel this was an unfortunate shortcoming of the CSS Wizardry Grids, stemming from the way browsers treat whitespace when using `display: inline-block;`, which is not an issue when using systems that rely on floats. I really, really am not a fan of kludging HTML with empty comments to mitigate whitespace. But still, there are some amazing things you can do with inline blocks that simply cannot be achieved with floats -- vertical alignment of neighbours for example. Or automaitcally centring a set of grid items that aren't taking up the full width. That means we need to deal with this whitespace problem *somehow*.
 
 Sorcery Grids gets around this by using CSS *rem*, or *root em* units. By setting the font size of grid containers to 0, and then resetting grid items to 1rem, whitespace is effectively negated. No need for blank comments littering your code, and no worries about integrating with a CMS that will create code you may not have precise control over.
 
 There are some considerations with *rem* units, so just remember that any relative styling you add to a grid item must use either a fixed unit like *px* -- though that isn't recommended -- or *rem* units.
+
+The biggest challenge is Android support, as described near the top of this readme.
 
 If you are supporting IE8, you can swap to em units and the negative letter spacing fix, and that is then fairly reliable. Add any polyfills like media query support or even *rem* unit support as needed.
 
@@ -139,20 +141,22 @@ might look like this:
         @extend %sg;
     }
     
-        .content,
-        .sub-content{
-            @extend %sg__item;
-            @extend %lap--sg-1-2;
-            @extend %palm--sg-1;
-        }
-    
-        .content{
-            @extend %sg-2-3;
-        }
-    
-        .sub-content{
-            @extend %sg-1-3;
-        }
+    .content,
+    .sub-content{
+        @extend %sg__item;
+        @extend %lap--sg-1-2;
+        @extend %palm--sg-1;
+    }
+
+    .content{
+        @extend %sg-2-3;
+    }
+
+    .sub-content{
+        @extend %sg-1-3;
+    }
+
+Sass will intelligently generate and combine the definitions of just those classes which you need. Be careful though - the more silent `@extend`s you use, the larger the CSS will be. With gzipping server-side this is less of an issue, but it is one worth considering.
 
 ### Reversed grids (`.sg--rev{}`)
 
@@ -223,6 +227,6 @@ If enabled, you can vertically align your grids to each other by simply using th
 
 ### Credits
 
-Sorcery Grids was written by Mike Hopkins, and based on the amazing work done by Harry Roberts of CSS Wizardry. I greatly respect the work that he has released, and many of the core logic ideas of Sorcery Grids come straight from the CSS Wizardry Grids code.
+Sorcery Grids was written by Mike Hopkins, and based on the amazing work done by Harry Roberts of CSS Wizardry. I greatly respect the work that he has released, as many of the core logic ideas of Sorcery Grids come straight from the CSS Wizardry Grids code.
 
-However, Sorcery Grids is by no means the perfect grid system. Feel free to take it and modify it, use bits from it, and learn from it. But most of all, have fun with it!
+Of course, Sorcery Grids is by no means the perfect grid system. Feel free to take it and modify it, use bits from it, and learn from it. But most of all, have fun with it!
