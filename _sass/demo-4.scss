@@ -2,7 +2,7 @@ $grids-base: (2 3 4 6 12);
 $breakpoints: "";
 
 $use-logic: table;
-$gutter-type: none;
+$base-gutter: none;
 
 @import "compass/reset";
 @import "sorcery-grids";
