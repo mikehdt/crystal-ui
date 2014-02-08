@@ -1,0 +1,13 @@
+$grids-base: (2 3 4 6 12);
+$breakpoints: "";
+
+$use-logic: table;
+$gutter-type: none;
+
+@import "compass/reset";
+@import "sorcery-grids";
+
+.fixed-block {
+	width: 200px;
+	min-width: 200px;
+}

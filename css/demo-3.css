@@ -57,12 +57,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /*!
  * =============================================
- * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.2.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
  */
-.sg, .sg__item {
+.set, .set-a, .set-b {
   margin: 0;
   vertical-align: top;
   -webkit-box-sizing: border-box;
@@ -70,7 +70,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-sizing: border-box;
 }
 
-.sg {
+.set {
   display: block;
   width: auto;
   margin-left: -0.5rem;
@@ -79,35 +79,65 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0;
   font-size: 0;
 }
-.sg > .sg__item {
+.set > .set-a, .set > .set-b {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
-.sg > .sg {
+.set > .set {
   display: inline-block;
   margin: 0;
 }
 
-.sg__item {
+.set-a, .set-b {
   display: inline-block;
   font-size: 1rem;
 }
 
+.set {
+  text-align: center;
+}
+.set > .set-a, .set > .set-b {
+  text-align: left;
+}
+
 /* Grid: base */
-.sg-1 {
-  width: 100%;
+.set-a {
+  width: 28.57143%;
 }
 
-.sg-1-4 {
-  width: 25%;
+.set-b {
+  width: 42.85714%;
 }
 
-.sg-2-4 {
-  width: 50%;
+/* Grid: lap */
+@media (max-width: 979px) and (min-width: 480px) {
+  .set-a {
+    width: 40%;
+  }
+
+  .set-b {
+    width: 60%;
+  }
+}
+/* Grid: palm */
+@media (max-width: 479px) {
+  .set-a, .set-b {
+    width: 33.33333%;
+  }
+}
+/* Offset: lap */
+/* Offset: palm */
+.set {
+  margin: 1rem 0;
 }
 
-.sg-3-4 {
-  width: 75%;
+.set, .set-a, .set-b, .set p {
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
 }
 
-/* Offset: base */
+.set p {
+  font-size: .85em;
+  padding: .5em 1em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+}

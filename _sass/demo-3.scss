@@ -21,6 +21,8 @@ $use-align-horizontal:  true;
 .set {
 	@extend %sg;
 	@extend %sg--center;
+
+	margin: 1rem 0;
 }
 .set-a {
 	@extend %sg__item;
@@ -33,4 +35,14 @@ $use-align-horizontal:  true;
 	@extend %sg-3-7;
 	@extend %lap--sg-3-5;
 	@extend %palm--sg-1-3;
+}
+
+.set, .set-a, .set-b, .set p {
+	outline: 1px solid rgba(0,0,0, .1);
+	background: rgba(0,0,0, .05);
+}
+.set p {
+	font-size: .85em;
+	padding: .5em 1em;
+	text-shadow: 0 1px 0 rgba(255,255,255, .75);
 }

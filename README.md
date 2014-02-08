@@ -19,11 +19,12 @@ Sorcery Grids are compatible with all modern desktop browsers and modern mobile 
 
 Note that at the moment, Android Browser 4.3.x and below have issues with the use of whitespace and REM units. This is resolved as of Android 4.4. There are some possible workarounds if you aren't able to eliminate whitespace in your HTML:
 
-1. There is a config option to enable some imprecision (very minor, a few px at most) into the grids generated. Desktop browsers such as Chrome, Safari and Internet Explorer account for it *mostly* - mobile browsers tend to be most affected in their output. However, this imprecision does negate the need for messing with whitespace.
-2. There is a config option to switch the grids to use floats instead of inline-block, at the expense of some nice features such as vertical alignment or decent guttering. This may be acceptable in many cases.
-3. If you wanted to use JavaScript to sniff for Android devices, you could add in a negative word-spacing (-0.43rem on grid container, normal on grid item) hack. You'd need to use JavaScript as this hack now breaks in Chrome as of version 25.
+1. Minify your source code. In PHP, this can be done by capturing and parsing the output buffer at its most basic; you may wish to cache the output to prevent parsing with every page view. Other languages such as ASP have similar possibility.
+2. Forego some of the niceness of inline blocks (vertical alignment, centring) and use floats. This is set with the configuration option `$use-logic`.
+3. Enable some imprecision (very minor, a few px at most) into the grids generated with the option `$use-imprecision-hack` set to `true`. Desktop browsers such as Chrome, Safari and Internet Explorer account for it *mostly* - mobile browsers tend to be most affected in their output. However, this imprecision does negate the need for messing with whitespace.
+4. If you wanted to use JavaScript to sniff for Android devices, you could add in a negative word-spacing (-.43rem on grid container, normal on grid item) and letter-spacing (-.31rem on grid container, normal on grid item) hack. You'd need to use JavaScript as this hack now breaks in Chrome as of version 25 and so cannot reliably be used with desktop browsers - or some custom fonts.
 
-A future idea could be using flexbox. It's the most promising solution, but would forego many backwards-compatibility needs. There's also the issue of differing levels of support due to the different draft specs. Browser render performance, mostly notably with the older draft specs, may be an important consideration for using flexbox on mobile devices. Though increases in hardware and software in the next two to three years could render performance consisderations entirely negligible for the most part.
+A future idea could be using flexbox, although it seems that the CSS Grid Layout spec may be the best future solution. However this would forego any backwards-compatibility needs. There is also the issue of differing levels of support due to the different draft specs. Browser render performance, mostly notably with the older draft specs, may be an important consideration for mobile devices. However increases in hardware and software in the next two to three years could render performance consisderations entirely negligible for the most part.
 
 ## Demo
 
@@ -35,13 +36,13 @@ If you can use Sass, you can use Sorcery Grids. There's only one file to include
 
 ## Usage
 
-Sorcery Grids is simple to implement and its classes are human-readable. You can also configure it to your preferences. By default, it uses classes of the form `.sg-1-4` for a one quarter width grid. However you can certainly configure it to generate more CSS Wizardry Grids-like names. If you really like CSS Wizardry Grids naming, change `$namespace` to "grid", set `$use-grid-namespace` to false and set `$use-ratio-names` to true -- that will instead generate names like `.one-quarter`. There are limits with this setup, as name classes only exist up to twelfths. Just in case.
+Sorcery Grids is simple to implement and its classes are human-readable. You can also configure it to your preferences. By default, it uses classes of the form `.sg-1-4` for a one quarter width grid. However you can certainly configure it to generate more CSS Wizardry Grids-like names. If you really like CSS Wizardry Grids naming, change `$namespace` to "grid", set `$use-grid-namespace` to false and set `$use-ratio-names` to true -- that will instead generate names like `.one-quarter`. There are limits with this setup, as name classes only exist up to twelfths for the time being.
 
 Setting up the breakpoints is probably the most complex part, so check out the demos to see how they work. Unlike CSS Wizardry Grids where the available ratios are halves, thirds, quarters, fifths, sixths, eighths, tenths and twelfths, Sorcery Grids has a logic core that lets you dynamically generate any ratio sets you want. Feel like sevenths? Let it make them for you. Want to use seventeenths for some reason? Nothing stopping you. Also unlike CSS Wizardry Grids, Sorcery Grids will only generate those ratio sets you request. Keeps things neat.
 
 I find that when developing, using static classes straight in HTML is a fast way to prototype, but I also later might want to consolidate things down using silent classes. Whether static or silent, the tradeoff is either complexity in HTML, or complexity in CSS. However when you want to swap, if it's either static OR silent, you have to change all your `.names` to `%names`, a tedious process. Sorcery Grids lets you get around this by developing initially with static in HTML, setting up silent `@extend` classes as you go, by having both static and silent turned on. Then later you can just turn off static generation to keep your resulting HTML code clean.
 
-An area where the grid system does differ in behaviour from CSS Wizardry Grids is in the push and pull classes. In CSS Wizardry Grids, push and pull use CSS left and right, whereas in Sorcery that results in margin-left and margin-right. If you need left and right offsetting, the shift and unshift modifiers will be what you're after (That seemed the most appropriate name for them).
+An area where the grid system does differ in behaviour from CSS Wizardry Grids is in the push and pull classes. In CSS Wizardry Grids, push and pull use CSS left and right, whereas in Sorcery Grids it will use margin-left and margin-right. If you need left and right offsetting, the shift and unshift modifiers will be what you're after.
 
 There are also some differences in how nesting is approached, as well as guttering.
 
@@ -54,32 +55,20 @@ syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-s
 * `.sg__item` is an **E**lement
 * `.sg--rev` is a **M**odifier
 
-Classes include your breakpoint namespaces (e.g. `.palm--sg-1-2`,
-`.lap--sg-2-3` and so on); your push and pull classes (`.push--sg-1-3`,
-`.pull--lap--sg-1-4` and so on); your regular classes (`.sg-1-10`,
-`.sg-3-4` etc).
+Classes include your breakpoint namespaces (e.g. `.palm--sg-1-2`, `.lap--sg-2-3` and so on); your push and pull classes (`.push--sg-1-3`, `.pull--lap--sg-1-4` and so on); your regular classes (`.sg-1-10`, `.sg-3-4` etc).
 
-Knowing these patterns will allow you to create hundreds of different
-combinations. A few examples:
+Knowing these patterns will allow you to create hundreds of different combinations. A few examples:
 
-    /**
-     * Sets an item to be one half across all breakpoints.
-     */
+    // Sets an item to be one half across all breakpoints.
     .sg-1-2 {}
 
-    /**
-     * Pushes an item one third of the way to the right across all breakpoints.
-     */
+    // Pushes an item one third of the way to the right across all breakpoints.
     .push--sg-1-3 {}
 
-    /**
-     * Sets an item to be ten twelfths wide only at the lap breakpoint.
-     */
+    // Sets an item to be ten twelfths wide only at the lap breakpoint.
     .lap--sg-10-12 {}
 
-    /**
-     * Pulls an item one half of the way to the left only at the palm breakpoint.
-     */
+    // Pulls an item one half of the way to the left only at the palm breakpoint.
     .pull--palm--sg-1-2 {}
 
 Code styling can be a controversial topic, but I try to "blend in" with each language I write. That said, I like tabs for indentation, and spaces for alignment. Normally I like Allman-style bracing too - I find the extra space helps readability, but here I've kept things within a more CSS-like behaviour. You may have different preferences. That's fine too. Feel free to change things for yourself if you prefer.
@@ -210,8 +199,7 @@ If enabled, you can centrally align your grids by simply using the `.sg--center`
 
 ### Vertically aligned grids (`.sg--[middle|bottom]{}`)
 
-If enabled, you can vertically align your grids to each other by simply using the
-`.sg--[middle|bottom]` modifiers:
+If enabled, you can vertically align your grids to each other by simply using the `.sg--[middle|bottom]` modifiers:
 
     <div class="sg  sg--middle">
 

@@ -4,3 +4,7 @@ $responsive:            false;
 
 @import "compass/reset";
 @import "sorcery-grids";
+
+body.width-control {
+	width: 960px;
+}

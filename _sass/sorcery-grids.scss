@@ -1,6 +1,6 @@
 /*!
  * =============================================
- * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.2.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
@@ -78,48 +78,60 @@ $breakpoints: (
 // These are the general options which control how and what the system will
 // generate. You should not need to edit anything beyond this section.
 //
-// 1.  Whether to generate responsive (media query) breakpoints or not
-// 2.  If mobile first, all block items are assumed 100% width unless specified
-// 3.  Only generate one class e.g., 1/2 but ignore 2/4
-// 4.  Static classes are your standard classes available all the time
-// 5.  Silent classes are intended to be used selectively with @extend
-// 6.  Generate horizontal alignment classes
-// 7.  Generate vertical alignment classes
-// 8.  Generate reversible grid modifiers
-// 9.  Generate push, pull, shift or unshift classes
+// 1.  Logic to use - inline (inline-block), float, table
+// 2.  Whether to generate responsive (media query) breakpoints or not
+// 3.  If mobile first, all block items are assumed 100% width unless specified
+// 4.  The namespace of the grid system
+// 5.  Whether to use the namespace for grid names or not
+// 6.  Set to true for ratios as names, false for ratios as numbers
+// 7.  Static classes are your standard classes available all the time
+// 8.  Silent classes are intended to be used selectively with @extend
+// 9.  Only generate one class e.g., 1/2 but ignore 2/4
 // 10. If using a gutter, the amount of spacing - recommend using rem or px
 // 11. Default gutter type, valid values are: equal, offset, none
 // 12. Whether to generate gutter width variations, for wide and narrow gutters
 // 13. Whether to generate none (i.e., remove), equal or offset gutter modifiers
-// 14. The namespace of the grid system
-// 15. Whether to use the namespace for grid names or not
-// 16. Set to true for ratios as names, false for ratios as numbers
-// 17. Use an imprecision hack for Android < 4.4 inline-blocks and whitespace
-// 18. Forego the full feature set (vertical align, guttering) and use floats
+// 14. Generate horizontal alignment classes
+// 15. Generate vertical alignment classes
+// 16. Generate reversible grid modifiers
+// 17. Generate push, pull, shift or unshift classes
+// 18. Use an imprecision hack for Android < 4.4 inline-blocks and whitespace
 
-$responsive:            true!default;   // [1]
-$mobile-first:          false!default;  // [2]
-$ignore-duplicates:     true!default;   // [3]
-$use-static-classes:    true!default;   // [4]
-$use-silent-classes:    false!default;  // [5]
-$use-align-horizontal:  false!default;  // [6]
-$use-align-vertical:    false!default;  // [7]
-$use-reversible:        false!default;  // [8]
-$use-push:              false!default;  // [9]
-$use-pull:              false!default;  // [9]
-$use-shift:             false!default;  // [9]
-$use-unshift:           false!default;  // [9]
+// --- Core Setup ---
+$use-logic:             inline!default; // [1]
+$responsive:            true!default;   // [2]
+$mobile-first:          false!default;  // [3]
+
+// --- Grid Names ---
+$namespace:             sg!default;     // [4]
+$use-grid-namespace:    true!default;   // [5]
+$use-ratio-names:       false!default;  // [6]
+$use-static-classes:    true!default;   // [7]
+$use-silent-classes:    false!default;  // [8]
+$ignore-duplicates:     true!default;   // [9]
+
+// --- Guttering ---
 $gutter:                1rem!default;   // [10]
-$gutter-type:           equal!default;  // [11]
+$base-gutter:           equal!default;  // [11]
 $use-gutter-widths:     false!default;  // [12]
 $use-gutter-none:       false!default;  // [13]
 $use-gutter-equal:      false!default;  // [13]
 $use-gutter-offset:     false!default;  // [13]
-$namespace:             sg!default;     // [14]
-$use-grid-namespace:    true!default;   // [15]
-$use-ratio-names:       false!default;  // [16]
-$use-imprecision-hack:  false!default;  // [17]
-$use-float-hack:        false!default;  // [18]
+
+// --- Alignment ---
+$use-align-horizontal:  false!default;  // [14]
+$use-align-vertical:    false!default;  // [15]
+
+// --- Grid Arrangement ---
+$use-reversible:        false!default;  // [16]
+$use-push:              false!default;  // [17]
+$use-pull:              false!default;  // [17]
+$use-shift:             false!default;  // [17]
+$use-unshift:           false!default;  // [17]
+
+// --- Hacks (avoid using if possible) ---
+$use-imprecision-hack:  false!default;  // [18]
+
 
 
 
@@ -152,6 +164,11 @@ $_imprecision: 0;
 
 @if $use-imprecision-hack {
 	$_imprecision: -0.00001;
+}
+
+// Sanity check
+@if $breakpoints == "" {
+	$responsive: false;
 }
 
 // Note: Names used in the logic are a breakpoint for the whole structure,
@@ -190,17 +207,17 @@ $_imprecision: 0;
 		$denominator-name: "";
 
 		// Numerator
-		@if      $numerator == 1    { $numerator-name: "one";        }
-		@else if $numerator == 2    { $numerator-name: "two";        }
-		@else if $numerator == 3    { $numerator-name: "three";      }
-		@else if $numerator == 4    { $numerator-name: "four";       }
-		@else if $numerator == 5    { $numerator-name: "five";       }
-		@else if $numerator == 6    { $numerator-name: "six";        }
-		@else if $numerator == 7    { $numerator-name: "seven";      }
-		@else if $numerator == 8    { $numerator-name: "eight";      }
-		@else if $numerator == 9    { $numerator-name: "nine";       }
-		@else if $numerator == 10   { $numerator-name: "ten";        }
-		@else if $numerator == 11   { $numerator-name: "eleven";     }
+		@if      $numerator == 1    { $numerator-name:   "one";      }
+		@else if $numerator == 2    { $numerator-name:   "two";      }
+		@else if $numerator == 3    { $numerator-name:   "three";    }
+		@else if $numerator == 4    { $numerator-name:   "four";     }
+		@else if $numerator == 5    { $numerator-name:   "five";     }
+		@else if $numerator == 6    { $numerator-name:   "six";      }
+		@else if $numerator == 7    { $numerator-name:   "seven";    }
+		@else if $numerator == 8    { $numerator-name:   "eight";    }
+		@else if $numerator == 9    { $numerator-name:   "nine";     }
+		@else if $numerator == 10   { $numerator-name:   "ten";      }
+		@else if $numerator == 11   { $numerator-name:   "eleven";   }
 		@else {
 			@warn "Named numerator for ‘#{$numerator}’ is not supported";
 		}
@@ -403,8 +420,13 @@ $_imprecision: 0;
 //
 // Generate gutters, either equal or offset.
 
-@mixin new-gutter ($cur-gutter:$gutter, $cur-type:$gutter-type) {
-	@if $use-float-hack {
+@mixin new-gutter ($cur-gutter:$gutter, $cur-type:$base-gutter) {
+	// Sanity check
+	@if $use-logic == "table" {
+		@warn "Tables are enabled, which are not compatible with gutters";
+	}
+
+	@if $use-logic == "float" {
 		float: none;
 
 		// Clear the container as it's no longer floated
@@ -414,7 +436,7 @@ $_imprecision: 0;
 			clear: both;
 		}
 	}
-	@else {
+	@else if $use-logic == "inline" {
 		display: block;
 	}
 
@@ -492,8 +514,8 @@ $_imprecision: 0;
 
 @mixin align-vertical ($align-type) {
 	// Sanity check
-	@if $use-float-hack {
-		@warn "Floats are enabled, which are not compatible with vertical alignment modifiers";
+	@if $use-logic == "float" {
+		@warn "Float logic and vertical alignment are enabled but they cannot be used with each other";
 	}
 
 	// Due to the way Sass optimises things it seems, children being inside is
@@ -510,6 +532,31 @@ $_imprecision: 0;
 		vertical-align: #{$align-type};
 	}
 }
+
+// MIXIN media-query
+//
+// Not used by the grid system, but a helpful way to use your breakpoints elsewhere
+@mixin media-query ($breakpoint) {
+	$breakpoint-item: false;
+
+	// Find the item by name, and if found extract its media query
+	@each $breakpoint-set in $breakpoints {
+		@if ($breakpoint == nth($breakpoint-set, 1))
+		{
+			$breakpoint-item: nth($breakpoint-set, 2);
+		}
+	}
+
+	// Sanity check
+	@if $breakpoint-item == false {
+		@warn "The media query for ‘#{$breakpoint}’ could not be found - is it defined?";
+	}
+
+	@media #{$breakpoint-item} {
+		@content;
+	}
+}
+
 
 // ========================
 // Generate the Grid System
@@ -532,15 +579,21 @@ $_imprecision: 0;
 
 #{class-gen($namespace)} {
 	// If we are using guttering by default, include it here
-	@if $gutter-type != none {
+	@if $base-gutter != none {
 		@include new-gutter();
 	}
 	@else {
-		@if $use-float-hack {
+		@if $use-logic == "float" {
 			float: left;
 		}
-		@else {
+		@else if $use-logic == "table" {
+			display: table;
+		}
+		@else if $use-logic == "inline" {
 			display: inline-block;
+		}
+		@else {
+			@warn "The logic type is not supported.";
 		}
 	}
 
@@ -549,10 +602,13 @@ $_imprecision: 0;
 	font-size: 0;
 
 	#{class-gen($namespace, "> ")} {
-		@if $use-float-hack {
+		@if $use-logic == "float" {
 			float: left;
 		}
-		@else {
+		@else if $use-logic == "table" {
+			display: table;
+		}
+		@else if $use-logic == "inline" {
 			display: inline-block;
 		}
 
@@ -561,10 +617,13 @@ $_imprecision: 0;
 }
 
 #{class-gen($namespace +"__item")} {
-	@if $use-float-hack {
+	@if $use-logic == "float" {
 		float: left;
 	}
-	@else {
+	@else if $use-logic == "table" {
+		display: table-cell;
+	}
+	@else if $use-logic == "inline" {
 		display: inline-block;
 	}
 
@@ -601,14 +660,14 @@ $_imprecision: 0;
 // Modifiers: Reverse
 @if $use-reversible {
 	#{class-gen($namespace +"--rev")} {
-		@if $use-float-hack == false {
+		@if $use-logic == "float" == false {
 			direction: rtl;
 			text-align: left;
 		}
 
 		#{class-gen($namespace, "> ")},
 		#{class-gen($namespace +"__item", "> ")} {
-			@if $use-float-hack {
+			@if $use-logic == "float" {
 				float: right;
 			}
 			@else {
@@ -618,7 +677,7 @@ $_imprecision: 0;
 		}
 
 		#{class-gen($namespace +"--rev", "> ")} {
-			@if $use-float-hack {
+			@if $use-logic == "float" {
 				float: left;
 			}
 			@else {
@@ -634,7 +693,7 @@ $_imprecision: 0;
 // -----------------
 
 // Check for conflicting hacks
-@if ($use-imprecision-hack and $use-float-hack) {
+@if ($use-imprecision-hack and $use-logic == "float") {
 	@warn "More than one hack is enabled; choose one only";
 }
 
@@ -667,12 +726,14 @@ $_imprecision: 0;
 // -------------------
 
 // Generate offset classes, outside of a media query
-/* Offset: base */
-@if $offsets-base != (0) {
-	@if $use-push    { @include push-pull("push"   ); }
-	@if $use-pull    { @include push-pull("pull"   ); }
-	@if $use-shift   { @include push-pull("shift"  ); }
-	@if $use-unshift { @include push-pull("unshift"); }
+@if $offsets-base != (0) and $offsets-base != "" {
+	@if $use-push or $use-pull or $use-shift or $use-unshift {
+		/* Offset: base */
+		@if $use-push    { @include push-pull("push"   ); }
+		@if $use-pull    { @include push-pull("pull"   ); }
+		@if $use-shift   { @include push-pull("shift"  ); }
+		@if $use-unshift { @include push-pull("unshift"); }
+	}
 }
 
 // Generate offset classes, including any media queries

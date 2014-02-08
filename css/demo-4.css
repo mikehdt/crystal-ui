@@ -57,12 +57,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /*!
  * =============================================
- * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.2.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
  */
-.set, .set-a, .set-b {
+.sg, .sg__item {
   margin: 0;
   vertical-align: top;
   -webkit-box-sizing: border-box;
@@ -70,8 +70,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-sizing: border-box;
 }
 
-.set {
-  display: block;
+.sg {
   width: auto;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
@@ -79,52 +78,70 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0;
   font-size: 0;
 }
-.set > .set-a, .set > .set-b {
+.sg > .sg__item {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
-.set > .set {
-  display: inline-block;
+.sg > .sg {
+  display: table;
   margin: 0;
 }
 
-.set-a, .set-b {
-  display: inline-block;
+.sg__item {
+  display: table-cell;
   font-size: 1rem;
 }
 
-.set {
-  text-align: center;
-}
-.set > .set-a, .set > .set-b {
-  text-align: left;
-}
-
 /* Grid: base */
-.set-a {
-  width: 28.57143%;
+.sg-1 {
+  width: 100%;
 }
 
-.set-b {
-  width: 42.85714%;
+.sg-1-2 {
+  width: 50%;
 }
 
-/* Grid: lap */
-@media (max-width: 979px) and (min-width: 480px) {
-  .set-a {
-    width: 40%;
-  }
+.sg-1-3 {
+  width: 33.33333%;
+}
 
-  .set-b {
-    width: 60%;
-  }
+.sg-2-3 {
+  width: 66.66667%;
 }
-/* Grid: palm */
-@media (max-width: 479px) {
-  .set-a, .set-b {
-    width: 33.33333%;
-  }
+
+.sg-1-4 {
+  width: 25%;
 }
-/* Offset: base */
-/* Offset: lap */
-/* Offset: palm */
+
+.sg-3-4 {
+  width: 75%;
+}
+
+.sg-1-6 {
+  width: 16.66667%;
+}
+
+.sg-5-6 {
+  width: 83.33333%;
+}
+
+.sg-1-12 {
+  width: 8.33333%;
+}
+
+.sg-5-12 {
+  width: 41.66667%;
+}
+
+.sg-7-12 {
+  width: 58.33333%;
+}
+
+.sg-11-12 {
+  width: 91.66667%;
+}
+
+.fixed-block {
+  width: 200px;
+  min-width: 200px;
+}

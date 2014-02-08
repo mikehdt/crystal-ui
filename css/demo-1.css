@@ -57,7 +57,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /*!
  * =============================================
- * SORCERY GRIDS 1.1.0 - CSS! (╯°□°）╯ NYAAA!
+ * SORCERY GRIDS 1.2.0 - CSS! (╯°□°）╯ NYAAA!
  * =============================================
  *
  * http://github.com/mikehdt/sorcery-grids
@@ -71,10 +71,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 .sg {
-  display: inline-block;
+  display: block;
+  width: auto;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
   width: 100%;
   padding: 0;
   font-size: 0;
+}
+.sg > .sg__item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .sg > .sg {
   display: inline-block;
