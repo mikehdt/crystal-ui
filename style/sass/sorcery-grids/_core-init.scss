@@ -1,0 +1,108 @@
+// Sanity checks
+// -------------
+@if length($sorcery-grids) == 0 {
+	@warn "No breakpoints have been configured. Grids cannot be generated.";
+}
+
+@if ($use-imprecision-hack and $grid-logic == "float") {
+	@warn "Both the imprecision hack and floats are enabled; This is unnecessary.";
+}
+
+@if (not $use-ratio-numbers and $use-ratio-numbers) {
+	@warn "Both named ratios and named grid ratios are set to false. This will cause sadness.";
+}
+
+
+// Global Variables
+// ----------------
+$_generated:   ();
+$_gen-offset:  ();
+$_imprecision: 0;
+
+@if $use-imprecision-hack { $_imprecision: -0.00001; }
+
+// Grid System Functions
+// ---------------------
+@import "functions-namespace";
+@import "functions-ratio";
+
+// Grid System Mixins
+// ------------------
+@import "core-new-grid-set";
+@import "core-logic-type";
+@import "core-new-grid";
+
+@import "grid-align";
+@import "grid-gutter";
+@import "grid-offsets";
+@import "grid-reversible";
+
+
+// Base grid container and item classing
+// -------------------------------------
+#{class-gen($name-grid)},
+#{class-gen($name-grid-item)} {
+	margin-left:   0;
+	margin-right:  0;
+	padding-left:  0;
+	padding-right: 0;
+
+	box-sizing: border-box;
+
+	@if $grid-logic == "inline" {
+		vertical-align: top;
+	}
+}
+
+#{class-gen($name-grid)} {
+	@include logic-type();
+
+	@if $grid-logic == "inline" {
+		font-size: 0;
+	}
+
+	// If we are using guttering by default, include it here
+	@if map-get($sorcery-grids, "default") {
+		$custom-gutter-width: map-get(map-get($sorcery-grids, "default"), "gutter-width");
+
+		@if $custom-gutter-width {
+			@include grid-gutter-item($custom-gutter-width, $gutter-style);
+		}
+	}
+	@else if $gutter-style != "clear" and $gutter-style != "none" {
+		@include grid-gutter-item($gutter-width, $gutter-style);
+	}
+
+	#{class-gen($name-grid, "> ")} {
+		@include logic-type("child");
+	}
+}
+
+#{class-gen($name-grid-item)} {
+	@include logic-type("child");
+
+	width: 100% - $_imprecision;
+
+	@if $grid-logic == "inline" {
+		font-size: 1rem;
+	}
+}
+
+
+// Grid System Grids
+// -----------------
+@each $breakpoint-name, $breakpoint-set in $sorcery-grids {
+	$grids: map-get($breakpoint-set, "grids");
+
+	/* === Grid: #{$breakpoint-name} === */
+	@if $breakpoint-name == "default" {
+		@include new-grid-set($grids, $breakpoint-set);
+	}
+	@else if $grid-responsive {
+		$media-query: map-get($breakpoint-set, "media");
+
+		@media #{$media-query} {
+			@include new-grid-set($grids, $breakpoint-set, $breakpoint-name);
+		}
+	}
+}

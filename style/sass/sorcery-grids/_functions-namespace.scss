@@ -1,0 +1,40 @@
+// FUNCTION class-gen
+//
+// Generates static, silent or both static and silent class names depending
+// on the $use-*-classes configuration variables.
+//
+@function class-gen ($class-name, $relative-prefix:"", $force-style:null) {
+	// If we are ignoring the class name generation, return an empty string
+	@if $class-name == "" {
+		@return "";
+	}
+
+	// Otherwise, determine the class name based on the settings of static and
+	// silent name generation
+	@if ($use-silent-classes and $use-static-classes and not $force-style) or $force-style == "both" {
+		// This must come first, to prevent incorrect matching only one item
+		@return $relative-prefix +"%"+ $class-name +", "+
+		        $relative-prefix +"."+ $class-name;
+	}
+	@else if $use-static-classes or $force-style == "static" {
+		@return $relative-prefix +"."+ $class-name;
+	}
+	@else if $use-silent-classes or $force-style == "silent" {
+		@return $relative-prefix +"%"+ $class-name;
+	}
+
+	@warn "Both `$use-static-classes` and `$use-silent-classes` are set to false, so no grids can be generated.";
+	@return "false";
+}
+
+// FUNCTION namespace-gen
+//
+// Conditionally append the namespace
+//
+@function namespace-gen () {
+	@if $name-grid-ratios {
+		@return $name-grid-ratios +"-";
+	}
+
+	@return "";
+}

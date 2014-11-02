@@ -1,0 +1,129 @@
+// MIXIN new-grid
+//
+// Include breakpoint grid generation and determine whether to generate for
+// a whole set of grid items or just one ratio.
+//
+@mixin new-grid ($grids, $class-breakpoint:"", $type:"") {
+	// Iterate through each grid item
+	@each $ratio in $grids {
+		$item-ratio: null;
+
+		@if str-index(inspect($ratio), "/") or str-index(inspect($ratio), "-") {
+			// Check if single-ratio, cast to string for comparison
+			$item-ratio: split-fraction($ratio);
+
+			@include new-grid-item($item-ratio, $class-breakpoint, $type);
+		}
+		@else {
+			// Generate a whole set of grid items based on the denominator
+			@for $numerator from 1 through ($ratio - 1) {
+				@if $numerator > 0 {
+					$item-ratio: (
+						numerator:   $numerator,
+						denominator: $ratio
+					);
+
+					@include new-grid-item($item-ratio, $class-breakpoint, $type);
+				}
+			}
+		}
+	}
+}
+
+
+// MIXIN new-grid-item
+//
+// This is the core logic that generates all the grid ratios. It stores a copy
+// of the generated ratio in a global variable for later comparison. If the
+// option to ignore duplicates is enabled, it uses this global variable to
+// ignore generating the class. If the option is disabled, it uses the global
+// variable to @extend the existing definition rather than define it again.
+//
+@mixin new-grid-item ($item-ratio, $class-breakpoint:"", $type:"") {
+	$numerator:   map-get($item-ratio, 'numerator');
+	$denominator: map-get($item-ratio, 'denominator');
+	$percentage:  percentage($numerator / $denominator);
+	$ratio:       ratio-gen($numerator, $denominator);
+	$prefix:      $type;
+	$suffix:      '';
+
+	@if $breakpoint-position == "prefix" {
+		$prefix: $prefix + $class-breakpoint;
+	}
+	@else if $breakpoint-position == "suffix" {
+		$suffix: $class-breakpoint;
+	}
+
+	$new-class:   $prefix + namespace-gen() + $ratio + $suffix;
+	$new-ratio:   $prefix + $percentage + $suffix;
+	$existing:    map-has-key($_generated, $new-ratio);
+
+	@if not $existing {
+		// Not existing, so store the new values in the lookup list
+		$_generated: map_merge($_generated, ($new-ratio: $ratio)) !global;
+	}
+
+	// Although it may seem that you could combine these two sets of statements,
+	// this produces duplicates and other unwanted side effects due to the use
+	// of extend on multiple classes at once
+	@if $use-static-classes {
+		.#{$new-class} {
+			@if $existing and not $ignore-duplicates {
+				// Extend the existing class
+				$class-name: $prefix + namespace-gen() + map-get($_generated, $new-ratio) + $suffix;
+				@extend .#{$class-name};
+			}
+			@else if not $existing {
+				// Include the data for the class
+				@include grid-item-data($percentage, $type);
+			}
+		}
+	}
+
+	@if $use-silent-classes {
+		%#{$new-class} {
+			// Avoid over-generating classes for both static and silent enabled
+			@if $existing and $use-static-classes and not $ignore-duplicates {
+				// Extend the existing static class
+				$class-name: $prefix + namespace-gen() + map-get($_generated, $new-ratio) + $suffix;
+				@extend .#{$class-name};
+			}
+			@else if not $existing {
+				@if $use-static-classes {
+					// It's technically new, but there will be an existing
+					// static class we should extend instead
+					@extend .#{$new-class};
+				}
+				@else {
+					// This is truly a new silent class name
+					@include grid-item-data($percentage, $type);
+				}
+			}
+		}
+	}
+}
+
+
+// MIXIN grid-item-data
+//
+// The core logic for the new-grid-item mixin, this does double duty as both
+// normal grids (width) or offset modifiers (push, pull etc).
+//
+@mixin grid-item-data ($percentage, $type:"") {
+	@if $type == "" {
+		// Create a new class value and store the new values
+		width: $percentage + $_imprecision;
+	}
+	@else {
+		// Drop relative positioning into silent classes which can't take
+		// advantage of the `[class*="push--"]` style selectors
+		@if $use-silent-classes {
+			position: relative;
+		}
+
+		@if      ($type == "push--") { margin-left:  $percentage; }
+		@else if ($type == "pull--") { margin-right: $percentage; }
+		@else if ($type ==  "out--") { left:         $percentage; }
+		@else if ($type ==   "in--") { right:        $percentage; }
+	}
+}

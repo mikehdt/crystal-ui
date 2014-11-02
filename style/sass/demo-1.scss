@@ -1,0 +1,49 @@
+$sorcery-grids: (
+	default: (
+		grids:              (2, 3, 4, 5, 6, 8),
+		gutter-width:       0,
+		gutter-extra-width: 1rem,
+		gutter-types:       (clear, equal, offset),
+
+		align-horizontal: (left, center, right),
+		align-vertical:   (top, middle, bottom),
+
+		offset-types:  (push, pull, in, out),
+		offset-ratios: (8),
+
+		reversible: true
+	),
+
+	s: (
+		media:              "(min-width: 25em)",
+		grids:              (1, 2, 3, 4),
+
+		offset-types:  (push, pull, in, out),
+		offset-ratios: (8)
+	),
+
+	m: (
+		media:            "(min-width: 30em)",
+		grids:            (1, 2, 3, 4, 5),
+
+		offset-types:  (push, pull, in, out),
+		offset-ratios: (2, 8)
+	),
+
+	l: (
+		media:            "(min-width: 45em)",
+		grids:            (1, 2, 3, 4, 5, 6)
+	),
+
+	xl: (
+		media:            "(min-width: 60em)",
+		grids:            (1, 2, 3, 4, 5, 6, 8)
+	)
+);
+
+$name-grid:      "row";
+$name-grid-item: "col";
+
+$breakpoint-position: prefix;
+
+@import "sorcery-grids";
