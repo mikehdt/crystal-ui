@@ -1,9 +1,9 @@
 @charset "UTF-8";
-/*! Sorcery Grids 2.0.0-β12: A highly configurable, fun, responsive grid system!
+/*! Sorcery Grids 2.0.0-β13: A highly configurable, fun, responsive grid system!
  *  http://github.com/mikehdt/sorcery-grids
  */
 .grid,
-.grid__item {
+.col {
   margin-left: 0;
   margin-right: 0;
   padding-left: 0;
@@ -13,71 +13,18 @@
 
 .grid {
   display: block;
-  font-size: 0;
-  margin-left: 0;
-  margin-right: 0; }
-  .grid > .grid {
-    margin-left: 0;
-    margin-right: 0; }
-  .grid > .grid__item {
-    padding-left: 0;
-    padding-right: 0; }
+  font-size: 0; }
   .grid > .grid {
     display: inline-block; }
 
-.grid__item {
+.col {
   display: inline-block;
   width: 100%;
   font-size: 1rem; }
 
 /* === Grid: default === */
-.grid-1 {
-  width: 100%; }
-
-.grid-1-2, .grid-2-4, .grid-3-6, .grid-4-8 {
+.grid-1-2 {
   width: 50%; }
-
-.grid-1-4, .grid-2-8 {
-  width: 25%; }
-
-.grid-3-4, .grid-6-8 {
-  width: 75%; }
-
-.grid-1-5 {
-  width: 20%; }
-
-.grid-2-5 {
-  width: 40%; }
-
-.grid-3-5 {
-  width: 60%; }
-
-.grid-4-5 {
-  width: 80%; }
-
-.grid-1-6 {
-  width: 16.66667%; }
-
-.grid-2-6 {
-  width: 33.33333%; }
-
-.grid-4-6 {
-  width: 66.66667%; }
-
-.grid-5-6 {
-  width: 83.33333%; }
-
-.grid-1-8 {
-  width: 12.5%; }
-
-.grid-3-8 {
-  width: 37.5%; }
-
-.grid-5-8 {
-  width: 62.5%; }
-
-.grid-7-8 {
-  width: 87.5%; }
 
 /* === Grid: s === */
 @media (min-width: 20em) {

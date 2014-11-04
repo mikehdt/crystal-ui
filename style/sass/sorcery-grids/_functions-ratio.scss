@@ -117,7 +117,7 @@
 	// Looping through all characters
 	@for $i from 1 through str-length($string) {
 		$character: str-slice($string, $i, $i);
-		$index: index($strings, $character);
+		$index:     index($strings, $character);
 
 		@if not $index {
 			@warn "Could not convert character `#{$character}` to a number.";
@@ -125,7 +125,13 @@
 		}
 
 		$number: nth($numbers, $index);
-		$result: $number;
+
+		// Keep incrementing by 10 for numbers greater than 9
+		@if $result != 0 {
+			$result: $result * 10;
+		}
+
+		$result: $result + $number;
 	}
 
 	@return $result;

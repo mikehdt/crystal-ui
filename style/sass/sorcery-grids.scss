@@ -1,5 +1,5 @@
 @charset "utf-8";
-/*! Sorcery Grids 2.0.0-β12: A highly configurable, fun, responsive grid system!
+/*! Sorcery Grids 2.0.0-β13: A highly configurable, fun, responsive grid system!
  *  http://github.com/mikehdt/sorcery-grids
  */
 
@@ -59,20 +59,7 @@
 
 $sorcery-grids: (
 	default: (
-		grids: (1, 2, 4, 5, 6, 8),
-
-		gutter-width:       0,
-		gutter-extras:      (),
-		gutter-extra-width: 1rem,
-		gutter-varations:   false,
-
-		align-horizontal: (),
-		align-vertical:   (),
-
-		offset-types:  (),
-		offset-ratios: (),
-
-		reversible: false
+		grids: (2)
 	),
 
 	s: (
@@ -102,18 +89,18 @@ $sorcery-grids: (
 // 2. Whether to generate responsive (media query) breakpoints or not
 // 3. Static classes are your standard classes available all the time
 // 4. Silent classes are intended to be used selectively with @extend
-$grid-logic:         inline!default;   // [1]
-$grid-responsive:    true!default;     // [2]
-$use-static-classes: true!default;     // [3]
-$use-silent-classes: false!default;    // [4]
+$grid-logic:         inline!default; // [1]
+$grid-responsive:    true!default;   // [2]
+$use-static-classes: true!default;   // [3]
+$use-silent-classes: false!default;  // [4]
 
 // --- Grid Names ---
 // 1. The prefix to be used for the outer grid container
 // 2. The prefix to be used for inner grid items
 // 3. The prefix for ratio classes, ignored if $use-namespace-ratios is false
-$name-grid:        grid!default;       // [1]
-$name-grid-item:   grid__item!default; // [2]
-$name-grid-ratios: grid!default;       // [3]
+$name-grid:        grid!default; // [1]
+$name-grid-item:   col!default;  // [2]
+$name-grid-ratios: grid!default; // [3]
 
 // --- Naming Styles ---
 // 1. Set to true to use numbers for ratios, false for words up to sixteenths
@@ -123,11 +110,11 @@ $name-grid-ratios: grid!default;       // [3]
 $use-ratio-numbers:    true!default;   // [1]
 $use-namespace-ratios: true!default;   // [2]
 $breakpoint-position:  suffix!default; // [3]
-$ignore-duplicates:    false!default;   // [4]
+$ignore-duplicates:    false!default;  // [4]
 
 // --- Gutters ---
-// 1. I dunno
-// 2. A width
+// 1. The default gutter width to use; This is the fallback for guttering
+// 2. The default gutter style to use - none, offset or equal
 $gutter-width: 1rem!default;   // [1]
 $gutter-style: offset!default; // [2]
 
