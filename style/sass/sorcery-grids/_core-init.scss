@@ -8,7 +8,7 @@
 	@warn "Both the imprecision hack and floats are enabled; This is unnecessary.";
 }
 
-@if (not $use-ratio-numbers and $use-ratio-numbers) {
+@if (not $name-grid-ratios and $ratio-style == "numbers") {
 	@warn "Both named ratios and named grid ratios are set to false. This will cause sadness.";
 }
 
@@ -19,7 +19,7 @@ $_generated:   ();
 $_gen-offset:  ();
 $_imprecision: 0;
 
-@if $use-imprecision-hack { $_imprecision: -0.00001; }
+@if $use-imprecision-hack { $_imprecision: 0.00001; }
 
 // Grid System Functions
 // ---------------------
@@ -54,6 +54,18 @@ $_imprecision: 0;
 	}
 }
 
+// Generate grid items first
+#{class-gen($name-grid-item)} {
+	@include logic-type("child");
+
+	width: 100% - $_imprecision;
+
+	@if $grid-logic == "inline" {
+		font-size: $grid-size-reset;
+	}
+}
+
+// So that they can be overridden later...
 #{class-gen($name-grid)} {
 	@include logic-type();
 
@@ -61,33 +73,21 @@ $_imprecision: 0;
 		font-size: 0;
 	}
 
-	// If we are using guttering by default, include it here
-	@if map-get($sorcery-grids, "default") {
-		$custom-gutter-width: map-get(map-get($sorcery-grids, "default"), "gutter-width");
+	$custom-gutter-width: map-get(map-get($sorcery-grids, "default"), "gutter-width");
+	$custom-gutter-style: map-get(map-get($sorcery-grids, "default"), "gutter-style");
 
-		@if $custom-gutter-width {
-			@include grid-gutter-item($custom-gutter-width, $gutter-style);
-		}
-	}
-	@else if $gutter-style != "clear" and $gutter-style != "none" {
-		@include grid-gutter-item($gutter-width, $gutter-style);
+	// Check if needs to be default gutter width
+	@if not $custom-gutter-width {
+		$custom-gutter-width: $gutter-width;
 	}
 
-	#{class-gen($name-grid, "> ")} {
-		@include logic-type("child");
+	// Check if needs to be default gutter style
+	@if not $custom-gutter-style {
+		$custom-gutter-style: $gutter-style;
 	}
+
+	@include grid-gutter-item($custom-gutter-width, $custom-gutter-style);
 }
-
-#{class-gen($name-grid-item)} {
-	@include logic-type("child");
-
-	width: 100% - $_imprecision;
-
-	@if $grid-logic == "inline" {
-		font-size: 1rem;
-	}
-}
-
 
 // Grid System Grids
 // -----------------

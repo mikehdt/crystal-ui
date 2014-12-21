@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 $sorcery-grids: (
 	default: (
 		grids:              (2, 3, 4, 5, 6, 8),
@@ -46,4 +47,41 @@ $name-grid-item: "col";
 
 $breakpoint-position: prefix;
 
+=======
+$sorcery-grids: (
+	default: (
+		grids:            (2),
+		gutter-width:     0,
+		gutter-extra:     1rem,
+		gutter-types:     ("clear", "equal", "offset")
+	),
+
+	s: (
+		media:            "(min-width: 25em)",
+		grids:            (1, 2, 3),
+		gutter-width:     0,
+		gutter-extra:     1rem,
+		gutter-types:     ("clear", "equal", "offset")
+	),
+
+	m: (
+		media:            "(min-width: 30em)",
+		grids:            (1, 2, 3, 4, 5)
+	),
+
+	l: (
+		media:            "(min-width: 45em)",
+		grids:            (1, 2, 3, 4, 5, 6)
+	),
+
+	xl: (
+		media:            "(min-width: 60em)",
+		grids:            (1, 2, 3, 4, 5, 6, 8)
+	)
+);
+
+$name-grid:      row;
+$name-grid-item: col;
+
+>>>>>>> Stashed changes
 @import "sorcery-grids";

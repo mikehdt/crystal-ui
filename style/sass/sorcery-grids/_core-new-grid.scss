@@ -112,7 +112,7 @@
 @mixin grid-item-data ($percentage, $type:"") {
 	@if $type == "" {
 		// Create a new class value and store the new values
-		width: $percentage + $_imprecision;
+		width: $percentage - $_imprecision;
 	}
 	@else {
 		// Drop relative positioning into silent classes which can't take
@@ -121,9 +121,11 @@
 			position: relative;
 		}
 
-		@if      ($type == "push--") { margin-left:  $percentage; }
-		@else if ($type == "pull--") { margin-right: $percentage; }
-		@else if ($type ==  "out--") { left:         $percentage; }
-		@else if ($type ==   "in--") { right:        $percentage; }
+		// Tread lightly with !important... here it's necessary to override
+		// grid within grids which have an offset
+		@if      ($type == "push--") { margin-left:  $percentage !important; }
+		@else if ($type == "pull--") { margin-right: $percentage !important; }
+		@else if ($type ==  "out--") { left:         $percentage !important; }
+		@else if ($type ==   "in--") { right:        $percentage !important; }
 	}
 }

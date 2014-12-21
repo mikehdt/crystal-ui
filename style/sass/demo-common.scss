@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 
 /**
@@ -434,6 +435,8 @@ th {
 
 
 
+=======
+>>>>>>> Stashed changes
 * {
 	-webkit-transition: all .5s ease-in-out;
 }
@@ -472,7 +475,11 @@ h3 {
 	min-width: 20em;
 	margin: 0 auto;
 }
+<<<<<<< Updated upstream
 .row, .col p {
+=======
+.row, .col, .col p {
+>>>>>>> Stashed changes
 	outline: 1px solid rgba(0,0,0, .1);
 	background: rgba(0,0,0, .05);
 }
@@ -486,16 +493,27 @@ h3 {
 }
 .col p {
 	font-size: 1em;
+<<<<<<< Updated upstream
   margin: 0;
+=======
+>>>>>>> Stashed changes
 	padding: .5em 1em;
 	text-align: center;
 	text-shadow: 0 1px 0 rgba(255,255,255, .75);
 }
+<<<<<<< Updated upstream
 .gutter--equal, .gutter--equal .col, .gutter--offset, .gutter--offset .col {
 	outline: 1px solid rgba(255,0,0, .1);
 	background: rgba(255,0,0, .05);
 }
 .gutter--equal p, .gutter--offset p {
+=======
+.row--gutter-equal, .row--gutter-equal .col, .row--gutter-offset, .row--gutter-offset .col {
+	outline: 1px solid rgba(255,0,0, .1);
+	background: rgba(255,0,0, .05);
+}
+.row--gutter-equal p, .row--gutter-offset p {
+>>>>>>> Stashed changes
 	outline: 1px solid rgba(255,0,0, .1);
 	background: rgba(255,0,0, .05);
 }

@@ -1,0 +1,157 @@
+@charset "utf-8";
+/*! Sorcery Grids 2.0.0-β16: A highly configurable and fun responsive grid system! http://github.com/mikehdt/sorcery-grids */
+
+// Sorcery Grids is based on ideas and open-source code from the incredibly
+// talented Harry Roberts at csswizardry.com - thank you! Sorcery was mixed and
+// messed about with magic and science by Mike Hopkins @mikehdt
+//
+// Take it, modify it, make it your own. Have fun with it!
+
+// Breakpoints
+// -----------
+// Here is how to set the various breakpoints which will be generated.
+// Note that the default base breakpoints are available at all sizes.
+//
+// You can specify a default group for unprefixed classes, or only groups which
+// are ruled by media queries. Additional group names can follow, separated by
+// a comma. Each breakpoint's config is a map of values contained within round
+// brackets. Certain config items will fall back on the default group, if they
+// are not specified within the current group.
+//
+// Inside the default breakpoint item, the minimum item required is grids. All
+// other items are entirely optional. The grids item should contain a bracketed
+// list of all grids you want. Whole numbers such as 4 will generate all grid
+// items for that ratio. Strings representing a single ratio such as "1-4" or
+// "1/4" will only generate that one specific ratio.
+//
+// Non-default groups should have a media attribute set with your desired media
+// query. List these from smallest to largest for a "mobile first" setup, or
+// from largest to smallest for a "desktop first" setup.
+//
+// Extra items are:
+//
+// gutter-type:        none|offset|equal - Breakpoint guttering style
+// gutter-width:       unit - Breakpoint guttering in rem or px
+// gutter-extras:      (clear/equal/offset) - Generate extra gutter styles
+// gutter-extra-width: unit - Gutter widths for equal/offset variations
+// gutter-variations:  true|false - Generate wide and narrow guttering options
+//
+// align-horizontal: (left/center/right) - Generate text-alignment classes
+// align-vertical:   (top/middle/bottom) - Generate vertical-align classes
+//
+// offset-types:  (push/pull/in/out) - Generate classes  to swap/offset columns
+// offset-ratios: (units) Ratios to generate for all push/pull/in/out types
+//
+// offset-push: (units) The ratios to generate just for the push offset
+// offset-pull: (units) The ratios to generate just for the pull offset
+// offset-in:   (units) The ratios to generate just for the in offset
+// offset-out:  (units) The ratios to generate just for the out offset
+//
+// reversible: Generate a reversible modifier, swaps whilst keeping source order
+//
+// An example of the options as set:
+//	default: (
+//		media: "(min-width: 1em)",
+//		grids: (1),
+//
+//		gutter-type:        none,
+//		gutter-width:       0,
+//		gutter-extras:      (),
+//		gutter-extra-width: 0,
+//		gutter-variations:  false,
+//
+//		align-horizontal: (),
+//		align-vertical:   (),
+//
+//		offset-types:  (),
+//		offset-ratios: (),
+//
+//		offset-push: (),
+//		offset-pull: (),
+//		offset-in:   (),
+//		offset-out:  (),
+//
+//		reversible: false
+//	)
+
+$sorcery-grids: (
+	default: (
+		grids: (1)
+	),
+
+	s: (
+		media: "(min-width: 20em)",
+		grids: (2, "1-3")
+	),
+
+	m: (
+		media: "(min-width: 50em)",
+		grids: (2, 4)
+	),
+
+	l: (
+		media: "(min-width: 90em)",
+		grids: (2, 4, 8)
+	)
+) !default;
+
+
+// General Configuration
+// ---------------------
+// These are the general options which control how and what the system will
+// generate. You should not need to edit anything beyond this section.
+
+// --- Core Setup ---
+// 1. Logic to use - inline (inline-block), or float
+// 2. Whether to generate responsive (media query) breakpoints or not
+// 3. What to reset the font size to for each grid item
+// 4. Static classes are your standard classes available all the time
+// 5. Silent classes are intended to be used selectively with @extend %class;
+// Note: Ideally you should only ever have 4 and 5 on together when developing
+$grid-logic:         inline !default; // [1]
+$grid-responsive:    true !default;   // [2]
+$grid-size-reset:    1rem !default;   // [3]
+$use-static-classes: true !default;   // [4]
+$use-silent-classes: false !default;  // [5]
+
+// --- Gutters ---
+// 1. The default gutter width to use; This is the fallback for guttering
+// 2. The default gutter style to use - none, offset or equal
+// Note: If you specify either of these in the default group, they will be
+// used instead of these config options here
+$gutter-width: 1rem !default;   // [1]
+$gutter-style: offset !default; // [2]
+
+// --- Grid Names ---
+// 1. The prefix to be used for the outer grid container
+// 2. The prefix to be used for inner grid items
+// 3. This prefix for ratios can set to false if $ratio-style is `words`
+// 4. Set to `numbers` to use numeric ratios, `words` for words up to sixteenths
+// 5. Whether to put the media query breakpoint name as a prefix or a suffix
+// 6. Ignore duplicates for each percentage e.g., if true 1/2 will skip 2/4
+$name-grid:        grid !default; // [1]
+$name-grid-item:   col !default;  // [2]
+$name-grid-ratios: grid !default; // [3]
+
+$ratio-style:         numbers !default; // [4]
+$breakpoint-position: suffix !default;  // [5]
+$ignore-duplicates:   true !default;    // [6]
+
+// --- Hacks (avoid using if possible) ---
+// 1. Use an imprecision hack for Android < 4.4 when using inline-block logic
+$use-imprecision-hack: false !default; // [1]
+
+
+
+
+
+
+
+
+
+
+// =============================================== //
+// =============== HERE BE DRAGONS =============== //
+// =============================================== //
+
+@import "sorcery-grids/core-init";

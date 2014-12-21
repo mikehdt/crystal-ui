@@ -3,7 +3,7 @@
 // Generate ratio names, either numeric or textual, depending on configuration.
 //
 @function ratio-gen ($numerator, $denominator) {
-	@if not $use-ratio-numbers {
+	@if $ratio-style == "words" {
 		$numerator-name:   "";
 		$denominator-name: "";
 

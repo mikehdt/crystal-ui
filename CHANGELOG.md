@@ -23,3 +23,9 @@
 * **2.0.0β13** Bug fix, commenting tidy
     * Fix generation of single ratios where the numerator or denominator were greater than 9
     * Tidy up commenting a little, simplify the base Sorcery file example
+
+* **2.0.0β16** Small bugfixes, more tidying up, renamed and simplified a few config options
+    * Fix direction of imprecision hack
+    * Fix logic generation of default and fallback grid offsets of `none` or `clear`
+    * Change ratio name selection to a string (rather than boolean)
+    * Add new grid ratio size reset option

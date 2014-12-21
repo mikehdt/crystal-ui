@@ -1,2 +1,6 @@
 .sass-cache/
 node_modules/
+*.map
+Gruntfile.js
+package.json
+project.json

@@ -50,11 +50,15 @@
 		margin-right: 0;
 	}
 
+	// Grids within grids
 	#{class-gen($name-grid, "> ")} {
+		@include logic-type("child");
+
 		margin-left:  0;
 		margin-right: 0;
 	}
 
+	// Child grid items
 	#{class-gen($name-grid-item, "> ")} {
 		@if $type == "equal" {
 			padding-left:  $width / 2;

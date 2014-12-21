@@ -32,7 +32,7 @@
 // Conditionally append the namespace
 //
 @function namespace-gen () {
-	@if $name-grid-ratios {
+	@if $name-grid-ratios != "" and $name-grid-ratios != false {
 		@return $name-grid-ratios +"-";
 	}
 

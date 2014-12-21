@@ -84,4 +84,29 @@
 
 		@include grid-offsets($offset-types, $offset-ratios, $class-breakpoint);
 	}
+
+	// Individual grid offsets
+	@if map-get($breakpoint-set, "offset-push") {
+		$offset-ratios: map-get($breakpoint-set, "offset-push");
+
+		@include grid-offset("push", $offset-ratios, $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-pull") {
+		$offset-ratios: map-get($breakpoint-set, "offset-pull");
+
+		@include grid-offset("pull", $offset-ratios, $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-in") {
+		$offset-ratios: map-get($breakpoint-set, "offset-in");
+
+		@include grid-offset("in", $offset-ratios, $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-out") {
+		$offset-ratios: map-get($breakpoint-set, "offset-out");
+
+		@include grid-offset("out", $offset-ratios, $class-breakpoint);
+	}
 }
