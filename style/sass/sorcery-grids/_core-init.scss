@@ -67,14 +67,19 @@ $_imprecision: 0;
 
 // So that they can be overridden later...
 #{class-gen($name-grid)} {
+	$custom-gutter-width: false;
+	$custom-gutter-style: false;
+
 	@include logic-type();
 
 	@if $grid-logic == "inline" {
 		font-size: 0;
 	}
 
-	$custom-gutter-width: map-get(map-get($sorcery-grids, "default"), "gutter-width");
-	$custom-gutter-style: map-get(map-get($sorcery-grids, "default"), "gutter-style");
+	@if map-get($sorcery-grids, "default") {
+		$custom-gutter-width: map-get(map-get($sorcery-grids, "default"), "gutter-width");
+		$custom-gutter-style: map-get(map-get($sorcery-grids, "default"), "gutter-style");
+	}
 
 	// Check if needs to be default gutter width
 	@if not $custom-gutter-width {

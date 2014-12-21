@@ -29,3 +29,4 @@
     * Fix logic generation of default and fallback grid offsets of `none` or `clear`
     * Change ratio name selection to a string (rather than boolean)
     * Add new grid ratio size reset option
+    * Allow breakpoints without grid sizings set

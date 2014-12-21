@@ -34,7 +34,9 @@
 
 	// Grid Divisions
 	// --------------
-	@include new-grid($grids, $class-breakpoint);
+	@if $grids {
+		@include new-grid($grids, $class-breakpoint);
+	}
 
 	// Grid System Modifiers
 	// ---------------------
@@ -42,6 +44,8 @@
 	@if map-get($breakpoint-set, "reversible") {
 		@include grid-reversible($class-breakpoint);
 	}
+
+
 
 	// Gutters
 	@if map-get($breakpoint-set, "gutter-types") {
@@ -63,6 +67,8 @@
 		@include grid-gutter($extra-gutter-types, $extra-gutter-width, $extra-gutter-widths, $class-breakpoint);
 	}
 
+
+
 	// Align Horizontal
 	@if map-get($breakpoint-set, "align-horizontal") {
 		$align-types: map-get($breakpoint-set, "align-horizontal");
@@ -77,6 +83,8 @@
 		@include grid-align("vertical", $align-types, $class-breakpoint);
 	}
 
+
+
 	// Grid Offsets
 	@if map-get($breakpoint-set, "offset-types") {
 		$offset-types:  map-get($breakpoint-set, "offset-types" );
@@ -85,28 +93,37 @@
 		@include grid-offsets($offset-types, $offset-ratios, $class-breakpoint);
 	}
 
+
+
 	// Individual grid offsets
+	// Push
 	@if map-get($breakpoint-set, "offset-push") {
 		$offset-ratios: map-get($breakpoint-set, "offset-push");
 
 		@include grid-offset("push", $offset-ratios, $class-breakpoint);
 	}
 
+	// Pull
 	@if map-get($breakpoint-set, "offset-pull") {
 		$offset-ratios: map-get($breakpoint-set, "offset-pull");
 
 		@include grid-offset("pull", $offset-ratios, $class-breakpoint);
 	}
 
+	// In
 	@if map-get($breakpoint-set, "offset-in") {
 		$offset-ratios: map-get($breakpoint-set, "offset-in");
 
 		@include grid-offset("in", $offset-ratios, $class-breakpoint);
 	}
 
+	// Out
 	@if map-get($breakpoint-set, "offset-out") {
 		$offset-ratios: map-get($breakpoint-set, "offset-out");
 
 		@include grid-offset("out", $offset-ratios, $class-breakpoint);
 	}
+
+	// Hide modifiers
+	// @@@TBC :)
 }
