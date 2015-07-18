@@ -1,0 +1,107 @@
+// MIXIN grid-gutter
+//
+// Generate gutters adjusted and versions with modifiers as well if enabled.
+//
+@mixin grid-gutter-extras ($extra-gutter-types:false, $extra-gutter-widths:false, $breakpoint-gutter-type:false, $class-breakpoint:"") {
+	// @@@ Abstract this prefix/suffix logic to a shared function
+	$prefix: "";
+	$suffix: "";
+
+	@if $breakpoint-position == "prefix" {
+		$prefix: $class-breakpoint;
+	}
+	@else if $breakpoint-position == "suffix" {
+		$suffix: $class-breakpoint;
+	}
+
+	// Generate type (offset, equal) variations if specified to do so
+	@if $extra-gutter-types {
+		// Generate extra types
+		@each $type in $extra-gutter-types {
+			#{class-gen($prefix +"gutter--"+ $type + $suffix)} {
+				@include grid-gutter-item($gutter-width, $type);
+			}
+
+			// Types and widths
+			// These are currently generated regardless of if you need them or not
+			// Not sure if adding another config option is a good thing...
+			@if $extra-gutter-widths
+			{
+				@each $width in $extra-gutter-widths {
+					$type-width: $type +"--"+ nth($width, 1);
+
+					#{class-gen($prefix +"gutter--"+ $type-width + $suffix)} {
+						@include grid-gutter-item(nth($width, 2), $type);
+					}
+				}
+			}
+		}
+	}
+
+	// Generate gutter widths if needed, based on the current breakpoint style
+	@if $extra-gutter-widths {
+		$current-gutter-type: $breakpoint-gutter-type;
+
+		// If it's empty, fall back to the global $gutter-type config
+		@if not $current-gutter-type {
+			$breakpoint-gutter-type: $gutter-type;
+		}
+
+		@each $width in $extra-gutter-widths {
+			#{class-gen($prefix +"gutter--"+ nth($width, 1) + $suffix)} {
+				@include grid-gutter-item(nth($width, 2), $breakpoint-gutter-type);
+			}
+		}
+	}
+
+	// // Generate width variations if specified to do so
+	// @each $width in $extra-gutter-widths {
+	// 	#{class-gen($prefix +"gutter--"+ $type +"--fucking-hell"+ $suffix)} {
+	// 		@include grid-gutter-item($gutter-width * 2, $type);
+	// 	}
+	// }
+}
+
+
+// MIXIN grid-gutter-item
+//
+// Generate gutters, either equal or offset.
+//
+@mixin grid-gutter-item ($width, $type) {
+	@if $type == "equal" {
+		margin-left:  -$width / 2;
+		margin-right: -$width / 2;
+	}
+	@else if $type == "offset" {
+		margin-left:  -$width;
+		margin-right: 0;
+	}
+	@else if $type == "clear" or $type == "none" {
+		margin-left:  0;
+		margin-right: 0;
+	}
+
+	// Grids within grids --- @@@ necessary?
+	// #{class-gen($name-grid, "> ")} {
+	// 	@include logic-type("child");
+
+	// 	margin-left:  0;
+	// 	margin-right: 0;
+	// }
+
+	// Child grid items
+	#{class-gen($name-grid-item, "> ")} {
+		@if $type == "equal" {
+			padding-left:  $width / 2;
+			padding-right: $width / 2;
+		}
+		@else if $type == "offset" {
+			padding-left:  $width;
+			padding-right: 0;
+		}
+		@else if $type == "clear" or $type == "none" {
+			padding-left:  0;
+			padding-right: 0;
+		}
+	}
+}

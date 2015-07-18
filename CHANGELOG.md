@@ -22,7 +22,7 @@
 
 * **2.0.0β13** Bug fix, commenting tidy
     * Fix generation of single ratios where the numerator or denominator were greater than 9
-    * Tidy up commenting a little, simplify the base Sorcery file example
+    * Tidy up commenting a little, simplify the base file
 
 * **2.0.0β16** Small bugfixes, more tidying up, renamed and simplified a few config options
     * Fix direction of imprecision hack
@@ -30,3 +30,10 @@
     * Change ratio name selection to a string (rather than boolean)
     * Add new grid ratio size reset option
     * Allow breakpoints without grid sizings set
+
+* **2.0.0β20** Remove float logic, remove unnecessary options, add customisable gutters
+    * Float logic is not longer supported, to keep things sane
+    * Some unnecessary configuration options removed
+    * Reversible classes made separate to the naming scheme to avoid CSS over-compilation
+    * New feature for customisable gutter widths - name them and make as many as you like
+    * Name change to Crystal Grids

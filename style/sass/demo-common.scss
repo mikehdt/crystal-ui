@@ -1,86 +1,3 @@
-<<<<<<< Updated upstream
-/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
-
-/**
- * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
- */
-
-html {
-  font-family: sans-serif; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-}
-
-/**
- * Remove default margin.
- */
-
-body {
-  margin: 0;
-}
-
-/* HTML5 display definitions
-   ========================================================================== */
-
-/**
- * Correct `block` display not defined for any HTML5 element in IE 8/9.
- * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
- * Correct `block` display not defined for `main` in IE 11.
- */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-nav,
-section,
-summary {
-  display: block;
-}
-
-/**
- * 1. Correct `inline-block` display not defined in IE 8/9.
- * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
- */
-
-audio,
-canvas,
-progress,
-video {
-  display: inline-block; /* 1 */
-  vertical-align: baseline; /* 2 */
-}
-
-/**
- * Prevent modern browsers from displaying `audio` without controls.
- * Remove excess height in iOS 5 devices.
- */
-
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-/**
- * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
- */
-
-[hidden],
-template {
-  display: none;
-}
-
-/* Links
-   ========================================================================== */
-
 /**
  * Remove the gray background color from active links in IE 10.
  */
@@ -97,9 +14,6 @@ a:active,
 a:hover {
   outline: 0;
 }
-
-/* Text-level semantics
-   ========================================================================== */
 
 /**
  * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
@@ -435,8 +349,7 @@ th {
 
 
 
-=======
->>>>>>> Stashed changes
+
 * {
 	-webkit-transition: all .5s ease-in-out;
 }
@@ -475,45 +388,22 @@ h3 {
 	min-width: 20em;
 	margin: 0 auto;
 }
-<<<<<<< Updated upstream
-.row, .col p {
-=======
-.row, .col, .col p {
->>>>>>> Stashed changes
+.grid, .col, .col p {
 	outline: 1px solid rgba(0,0,0, .1);
 	background: rgba(0,0,0, .05);
 }
-.row {
+.grid {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 }
-.row .row {
+.grid > .grid {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 .col p {
 	font-size: 1em;
-<<<<<<< Updated upstream
   margin: 0;
-=======
->>>>>>> Stashed changes
 	padding: .5em 1em;
 	text-align: center;
 	text-shadow: 0 1px 0 rgba(255,255,255, .75);
-}
-<<<<<<< Updated upstream
-.gutter--equal, .gutter--equal .col, .gutter--offset, .gutter--offset .col {
-	outline: 1px solid rgba(255,0,0, .1);
-	background: rgba(255,0,0, .05);
-}
-.gutter--equal p, .gutter--offset p {
-=======
-.row--gutter-equal, .row--gutter-equal .col, .row--gutter-offset, .row--gutter-offset .col {
-	outline: 1px solid rgba(255,0,0, .1);
-	background: rgba(255,0,0, .05);
-}
-.row--gutter-equal p, .row--gutter-offset p {
->>>>>>> Stashed changes
-	outline: 1px solid rgba(255,0,0, .1);
-	background: rgba(255,0,0, .05);
 }

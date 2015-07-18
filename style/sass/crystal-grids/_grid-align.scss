@@ -31,17 +31,16 @@
 	}
 
 	// @@@ This is a problem with silent classes
+	// This resets alignment within children. However, it can cause problems
+	// with silent classes, so might need to consider another way around this...
 	@if $align-type != "left" {
 		#{class-gen($class-name)} > .#{$name-grid-item} {
 			text-align: left;
 		}
 	}
 
-	// Due to the way Sass optimises things it seems, children being inside is
-	// necessary to avoid issues when both class types are enabled.
-	// @@@ Issues with static AND silent enabled; need to be separated?
-	#{class-gen($class-name)},
-	#{class-gen($class-name)} > .#{$class-name} {
+	// Alignment
+	#{class-gen($class-name)} {
 		text-align: #{$align-type};
 	}
 }
@@ -52,11 +51,6 @@
 // Also as it says on the tin.
 //
 @mixin grid-align-item-vertical ($align-type, $class-breakpoint) {
-	// Sanity check
-	@if $grid-logic == "float" {
-		@warn "Float logic and vertical alignment are enabled, but they cannot be used with each other.";
-	}
-
 	$class-name: "align--"+ $align-type;
 
 	@if $breakpoint-position == "prefix" {

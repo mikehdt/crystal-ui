@@ -1,0 +1,19 @@
+// MIXIN grid-offset
+//
+// As above, but for one type of item only
+//
+@mixin grid-offset ($offset-type, $offset-ratios, $class-breakpoint) {
+	/* --- Offset: #{$offset-type} --- */
+	// This may preclude some media-query-only situations from occurring..?
+	@if $use-static-classes and $use-silent-classes == false and not index($_gen-offset, $offset-type) {
+		// Not the best selector, but avoids position: relative; on
+		// every element when static classes are in use
+		[class*="#{$offset-type}--"] {
+			position: relative;
+		}
+
+		$_gen-offset: join($_gen-offset, $offset-type) !global;
+	}
+
+	@include new-grid($offset-ratios, $class-breakpoint, $offset-type +"--");
+}

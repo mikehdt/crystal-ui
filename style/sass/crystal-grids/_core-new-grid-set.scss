@@ -1,0 +1,103 @@
+// MIXIN new-grid-set
+//
+// Include breakpoint grid generation for a type
+//
+@mixin new-grid-set ($grids, $breakpoint-set, $breakpoint-name:null) {
+	$class-breakpoint: "";
+
+	@if $breakpoint-name {
+		@if $breakpoint-position == prefix {
+			$class-breakpoint: $breakpoint-name + "--";
+		}
+		@else if $breakpoint-position == suffix {
+			$class-breakpoint: "--" + $breakpoint-name;
+		}
+		@else {
+			@warn 'Breakpoint position can only be either `prefix` or `suffix`';
+		}
+	}
+
+	// Fancy media query gutter modifier check
+	@if $gutter-type != "none" and $breakpoint-name and map-get($breakpoint-set, "gutter-width") {
+		// Media queries are fun
+		#{class-gen($name-grid)} {
+			$new-gutter-width: map-get($breakpoint-set, "gutter-width");
+
+			@if not $new-gutter-width {
+				// Reset to default if not specified
+				$new-gutter-width: $gutter-width;
+			}
+
+			@include grid-gutter-item($new-gutter-width, $gutter-type);
+		}
+	}
+
+	// Grid Divisions
+	// --------------
+	@if $grids {
+		@include new-grid($grids, $class-breakpoint);
+	}
+
+	// Grid System Modifiers
+	// ---------------------
+	// Reversible
+	@if map-get($breakpoint-set, "reversible") {
+		@include grid-reversible($class-breakpoint);
+	}
+
+	// Gutter extras
+	@if map-get($breakpoint-set, "gutter-extra-types") and map-get($breakpoint-set, "gutter-extra-widths") {
+		// Both type and width
+		@include grid-gutter-extras(
+			$extra-gutter-types:map-get($breakpoint-set, "gutter-extra-types"),
+			$extra-gutter-widths:map-get($breakpoint-set, "gutter-extra-widths"),
+			$breakpoint-gutter-type:map-get($breakpoint-set, "gutter-type"),
+			$class-breakpoint:$class-breakpoint
+		);
+	}
+	@else if map-get($breakpoint-set, "gutter-extra-types") {
+		// Only type
+		@include grid-gutter-extras(
+			$extra-gutter-types:map-get($breakpoint-set, "gutter-extra-types"),
+			$breakpoint-gutter-type:map-get($breakpoint-set, "gutter-type"),
+			$class-breakpoint:$class-breakpoint
+		);
+	}
+	@else if map-get($breakpoint-set, "gutter-extra-widths") {
+		// Only width
+		@include grid-gutter-extras(
+			$extra-gutter-widths:map-get($breakpoint-set, "gutter-extra-widths"),
+			$breakpoint-gutter-type:map-get($breakpoint-set, "gutter-type"),
+			$class-breakpoint:$class-breakpoint
+		);
+	}
+
+	// Align modifiers - horizontal, vertical
+	@if map-get($breakpoint-set, "align-horizontal") {
+		@include grid-align("horizontal", map-get($breakpoint-set, "align-horizontal"), $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "align-vertical") {
+		@include grid-align("vertical",   map-get($breakpoint-set,   "align-vertical"), $class-breakpoint);
+	}
+
+	// Individual grid offsets - push, pull, left, right
+	@if map-get($breakpoint-set, "offset-push") {
+		@include grid-offset("push",  map-get($breakpoint-set,  "offset-push"), $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-pull") {
+		@include grid-offset("pull",  map-get($breakpoint-set,  "offset-pull"), $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-left") {
+		@include grid-offset("left",  map-get($breakpoint-set,  "offset-left"), $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-right") {
+		@include grid-offset("right", map-get($breakpoint-set, "offset-right"), $class-breakpoint);
+	}
+
+	// Hide modifiers?
+	// @@@ Future consideration :)
+}

@@ -3,6 +3,7 @@
 // Sets up the basic classes for reversible grids.
 //
 @mixin grid-reversible ($class-breakpoint:"") {
+	// @@@ Abstract this prefix/suffix logic to a shared function
 	$prefix: "";
 	$suffix: "";
 
@@ -19,7 +20,7 @@
 
 	// We will rely on the dev to implement these where needed as otherwise Sass class generation
 	// can go crazy, especially with silent classes set to on
-	#{class-gen($prefix +"rev--reset"+ $suffix)} {
+	#{class-gen($prefix +"rev-reset"+ $suffix)} {
 		@include grid-reversible-item("child");
 	}
 }
@@ -31,18 +32,11 @@
 //
 @mixin grid-reversible-item ($context:"parent") {
 	@if $context == "parent" {
-		@if $grid-logic == "inline" {
-			direction: rtl;
-			text-align: left;
-		}
-		@else if $grid-logic == "float" {
-			float: right;
-		}
+		direction:  rtl;
+		text-align: left;
 	}
 	@else if $context == "child" {
-		@if $grid-logic == "inline" {
-			direction: ltr;
-			text-align: left;
-		}
+		direction:  ltr;
+		text-align: left;
 	}
 }

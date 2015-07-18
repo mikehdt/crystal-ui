@@ -123,9 +123,9 @@
 
 		// Tread lightly with !important... here it's necessary to override
 		// grid within grids which have an offset
-		@if      ($type == "push--") { margin-left:  $percentage !important; }
-		@else if ($type == "pull--") { margin-right: $percentage !important; }
-		@else if ($type ==  "out--") { left:         $percentage !important; }
-		@else if ($type ==   "in--") { right:        $percentage !important; }
+		@if      ($type ==  "push--") { margin-left:  $percentage !important; }
+		@else if ($type ==  "pull--") { margin-right: $percentage !important; }
+		@else if ($type ==  "left--") { left:         $percentage !important; }
+		@else if ($type == "right--") { right:        $percentage !important; }
 	}
 }
