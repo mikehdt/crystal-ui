@@ -41,7 +41,7 @@ Note that certain patterns can result in CSS over-generation when using `@extend
 Crystal Grids' classes are based on [a modified BEM
 syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) with a slight bending of the rules when using numeric fractions, to keep name complexity to a minimum.
 
-Classes include your breakpoint namespaces (e.g. `.col-1-2--s`, `.col-2-3--m` and so on); your push and pull classes (`.push--col-1-3`, `.pull--grid-1-4--m` and so on); your regular classes (`.grid-1-10`, `.grid-3-4` etc).
+Classes include your breakpoint namespaces (e.g. `.col-1-2--s`, `.col-2-3--m` and so on); your push and pull classes (`.push--col-1-3`, `.pull--col-1-4--m` and so on); your regular classes (`.col-1-10`, `.col-3-4` etc).
 
 Code styling can be a controversial topic, but I try to "blend in" with each language I write. That said, I like tabs for indentation, and spaces for alignment.
 
@@ -51,11 +51,11 @@ If you are using traditional classes then an example, basic usage might look lik
 
     <div class="grid">
 
-        <div class="col  grid-1-2--m  grid-1-3--l">
+        <div class="col  col-1-2--m  col-1-3--l">
             ...
         </div>
 
-        <div class="col  grid-1-2--m  grid-2-3--l">
+        <div class="col  col-1-2--m  col-2-3--l">
             ...
         </div>
 
