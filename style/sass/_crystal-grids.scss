@@ -134,10 +134,6 @@ $ratio-style:         numbers !default; // [4]
 $breakpoint-position: suffix !default;  // [5]
 $ignore-duplicates:   true !default;    // [6]
 
-// --- Hacks (avoid using if possible) ---
-// 1. Use an imprecision hack for Android < 4.4 when using inline-block logic
-$use-imprecision-hack: false !default; // [1]
-
 
 
 

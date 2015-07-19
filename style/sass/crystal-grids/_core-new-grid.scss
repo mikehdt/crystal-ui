@@ -112,7 +112,7 @@
 @mixin grid-item-data ($percentage, $type:"") {
 	@if $type == "" {
 		// Create a new class value and store the new values
-		width: $percentage - $_imprecision;
+		width: $percentage;
 	}
 	@else {
 		// Drop relative positioning into silent classes which can't take

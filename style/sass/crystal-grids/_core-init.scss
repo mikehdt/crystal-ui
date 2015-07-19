@@ -11,12 +11,8 @@
 
 // Global Variables
 // ----------------
-$_generated:   ();
-$_gen-offset:  ();
-$_imprecision: 0;
-
-// Fix a rounding issue in Android AOSP browser < Android 4.4
-@if $use-imprecision-hack { $_imprecision: 0.00001; }
+$_generated:   () !global;
+$_gen-offset:  () !global;
 
 // Grid System Functions
 // ---------------------
@@ -61,7 +57,7 @@ $_imprecision: 0;
 #{class-gen($name-grid-item)} {
 	@include logic-type("child");
 
-	width: 100% - $_imprecision;
+	width: 100%;
 	margin-left:   0;
 	margin-right:  0;
 

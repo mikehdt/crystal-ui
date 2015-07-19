@@ -43,3 +43,7 @@
     * Add behaviours of push/pull to be positive/negative right margin
     * Address issue of embedded grids directly within grids
     * Fix demo file
+
+* **2.0.0β22** Tiny update
+    * Set globals on the global variables which track settings
+    * Dropped support for the Android AOSP imprecision hack
