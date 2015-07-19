@@ -1,32 +1,35 @@
 $crystal-grids: (
 	default: (
-		grids:            (2),
-		gutter-width:     0,
-		gutter-extra-types:  ("clear", "equal", "offset"),
-		gutter-extra-widths: ("s": 1rem)
+		grids: (1, 2),
+
+		gutter-width: 2rem,
+		gutter-extra-types: ("clear", "equal", "offset"),
+
+		align-vertical: ("bottom"),
+		reversible: true
 	),
 
 	s: (
-		media:            "(min-width: 25em)",
-		grids:            (1, 2, 3),
-		gutter-width:     0,
-		gutter-extra-types:  ("clear", "equal", "offset")
+		media: "(min-width: 30em)",
+		grids: (2, 3)
 	),
 
 	m: (
-		media:            "(min-width: 30em)",
-		grids:            (1, 2, 3, 4, 5)
+		media: "(min-width: 45em)",
+		grids: (2, 3, 4, 5),
+
+		offset-left:    ("1/4", "1/2"),
+		offset-right:   ("1/4"),
+		offset-push:    ("1/4"),
+		offset-pull:    ("1/4", "1/2"),
+		offset-shift:   ("1/4"),
+		offset-unshift: ("1/4")
 	),
 
 	l: (
-		media:            "(min-width: 45em)",
-		grids:            (1, 2, 3, 4, 5, 6)
+		media: "(min-width: 60em)",
+		grids: (2, 3)
 	),
-
-	xl: (
-		media:            "(min-width: 60em)",
-		grids:            (1, 2, 3, 4, 5, 6, 8)
-	)
 );
 
 @import "crystal-grids";

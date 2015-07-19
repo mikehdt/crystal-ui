@@ -15,6 +15,7 @@ $_generated:   ();
 $_gen-offset:  ();
 $_imprecision: 0;
 
+// Fix a rounding issue in Android AOSP browser < Android 4.4
 @if $use-imprecision-hack { $_imprecision: 0.00001; }
 
 // Grid System Functions
@@ -72,7 +73,17 @@ $_imprecision: 0;
 // So that they can be overridden later...
 #{class-gen($name-grid)} {
 	@include logic-type();
-	@include grid-gutter-item($gutter-width, $gutter-type);
+
+	$default-gutter: map-get(map-get($crystal-grids, "default"), "gutter-width");
+
+	@if $default-gutter {
+		// Use the set default
+		@include grid-gutter-item($default-gutter, $gutter-type);
+	}
+	@else {
+		// Use the global default
+		@include grid-gutter-item($gutter-width, $gutter-type);
+	}
 
 	padding-left:  0;
 	padding-right: 0;
@@ -80,6 +91,14 @@ $_imprecision: 0;
 	// This is part of the magic to get inline-blocks to behave
 	// This remove the space between elements
 	font-size: 0;
+
+	// Grids within grids
+	#{class-gen($name-grid, "> ")} {
+		@include logic-type("child");
+
+		margin-left:  0;
+		margin-right: 0;
+	}
 }
 
 // Grid System Grids

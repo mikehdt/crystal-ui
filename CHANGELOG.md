@@ -37,3 +37,9 @@
     * Reversible classes made separate to the naming scheme to avoid CSS over-compilation
     * New feature for customisable gutter widths - name them and make as many as you like
     * Name change to Crystal Grids
+
+* **2.0.0β21** New movement modifier, bug fixes and tidy up
+    * Change behaviour of unshift/shift to be positive/negative left margin
+    * Add behaviours of push/pull to be positive/negative right margin
+    * Address issue of embedded grids directly within grids
+    * Fix demo file

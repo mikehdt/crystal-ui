@@ -81,15 +81,26 @@
 		@include grid-align("vertical",   map-get($breakpoint-set,   "align-vertical"), $class-breakpoint);
 	}
 
-	// Individual grid offsets - push, pull, left, right
+	// Individual grid offsets
+	// Push and pull
 	@if map-get($breakpoint-set, "offset-push") {
-		@include grid-offset("push",  map-get($breakpoint-set,  "offset-push"), $class-breakpoint);
+		@include grid-offset("push", map-get($breakpoint-set, "offset-push"), $class-breakpoint);
 	}
 
 	@if map-get($breakpoint-set, "offset-pull") {
-		@include grid-offset("pull",  map-get($breakpoint-set,  "offset-pull"), $class-breakpoint);
+		@include grid-offset("pull", map-get($breakpoint-set, "offset-pull"), $class-breakpoint);
 	}
 
+	// Unshift and shift
+	@if map-get($breakpoint-set, "offset-unshift") {
+		@include grid-offset("unshift", map-get($breakpoint-set,  "offset-unshift"), $class-breakpoint);
+	}
+
+	@if map-get($breakpoint-set, "offset-shift") {
+		@include grid-offset("shift",   map-get($breakpoint-set,    "offset-shift"), $class-breakpoint);
+	}
+
+	// Left and right
 	@if map-get($breakpoint-set, "offset-left") {
 		@include grid-offset("left",  map-get($breakpoint-set,  "offset-left"), $class-breakpoint);
 	}

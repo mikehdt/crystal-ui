@@ -81,7 +81,7 @@
 		margin-right: 0;
 	}
 
-	// Grids within grids --- @@@ necessary?
+	// Grids within grids --- @@@ necessary? Seems better covered by one top-level?
 	// #{class-gen($name-grid, "> ")} {
 	// 	@include logic-type("child");
 

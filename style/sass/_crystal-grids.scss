@@ -1,5 +1,5 @@
 @charset "utf-8";
-/*! Crystal Grids 2.0.0-β20: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-ui/grids */
+/*! Crystal Grids 2.0.0-β21: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-ui/grids */
 
 // Crystal Grids is based on ideas and open-source code from the incredibly
 // talented Harry Roberts at csswizardry.com - thank you! Crystal was mixed and
@@ -32,7 +32,6 @@
 //
 // gutter-type:  none|offset|equal - Default breakpoint guttering style
 // gutter-width: unit - Breakpoint guttering in rem or px
-// Note: These are only valid in non-default (named) sets
 //
 // gutter-extra-types:  (clear/equal/offset) - Generate extra gutter styles
 // gutter-extra-widths: (map) - Generate additional gutter widths
@@ -75,6 +74,10 @@
 
 $crystal-grids: (
 	default: (
+		grids: (1, 2),
+
+		gutter-width: 2rem,
+
 		gutter-extra-types:  ("equal"),
 		gutter-extra-widths: ("wide": 4rem)
 	),
