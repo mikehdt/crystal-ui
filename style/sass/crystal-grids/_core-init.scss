@@ -37,10 +37,8 @@ $_gen-offset:  () !global;
 //
 @mixin logic-type ($context:"parent") {
 	@if $context == "parent" {
-		display: block;
-	}
-	@else if $context == "child" {
-		display: inline-block;
+		display: flex;
+		flex-wrap: wrap;
 	}
 }
 
@@ -58,8 +56,8 @@ $_gen-offset:  () !global;
 	@include logic-type("child");
 
 	width: 100%;
-	margin-left:   0;
-	margin-right:  0;
+	margin-left:  0;
+	margin-right: 0;
 
 	// This is part of the magic to get inline blocks to behave
 	// This resets the font size on a child element

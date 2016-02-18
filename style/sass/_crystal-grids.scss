@@ -1,5 +1,12 @@
 @charset "utf-8";
-/*! Crystal Grids 2.0.0-β21: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-ui/grids */
+/*! Crystal Grids 3.0.0-α1: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-grids */
+
+// !!!!!
+// Alpha 3.0, now moving to Flexbox and probably going to drop a lot of older
+// code. Going to transition it to being focused on simpler, clean grids rather
+// than esoteric features (which I have used, but probably would now keep as
+// part of a project-specific addition rather than in the core here)
+// !!!!!
 
 // Crystal Grids is based on ideas and open-source code from the incredibly
 // talented Harry Roberts at csswizardry.com - thank you! Crystal was mixed and
@@ -105,13 +112,11 @@ $crystal-grids: (
 // generate. You should not need to edit anything beyond this section.
 
 // --- Core Setup ---
-// 1. What to reset the font size to for each grid item
-// 2. Static classes are your standard classes available all the time
-// 3. Silent classes are intended to be used selectively with @extend %class;
+// 1. Static classes are your standard classes available all the time
+// 2. Silent classes are intended to be used selectively with @extend %class;
 // Note: Ideally you should only ever have 3 and 4 on together when developing
-$grid-size-reset:    1.6rem !default; // [1]
-$use-static-classes: true !default;   // [2]
-$use-silent-classes: false !default;  // [3]
+$use-static-classes: true !default;   // [1]
+$use-silent-classes: false !default;  // [2]
 
 // --- Gutters ---
 // 1. The default gutter width to use in rems etc.
@@ -123,16 +128,14 @@ $gutter-type: offset !default; // [2]
 // 1. The prefix to be used for the outer grid container
 // 2. The prefix to be used for inner grid items
 // 3. This prefix for ratios can set to false if $ratio-style is `words`
-// 4. Set to `numbers` to use numeric ratios, `words` for words up to sixteenths
-// 5. Whether to put the media query breakpoint name as a prefix or a suffix
-// 6. Ignore duplicates for each percentage e.g., if true 1/2 will skip 2/4
+// 4. Whether to put the media query breakpoint name as a prefix or a suffix
+// 5. Ignore duplicates for each percentage e.g., if true 1/2 will skip 2/4
 $name-grid:        grid !default; // [1]
 $name-grid-item:   col !default;  // [2]
 $name-grid-ratios: col !default;  // [3]
 
-$ratio-style:         numbers !default; // [4]
-$breakpoint-position: suffix !default;  // [5]
-$ignore-duplicates:   true !default;    // [6]
+$breakpoint-position: suffix !default;  // [4]
+$ignore-duplicates:   true !default;    // [5]
 
 
 

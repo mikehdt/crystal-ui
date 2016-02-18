@@ -3,68 +3,12 @@
 // Generate ratio names, either numeric or textual, depending on configuration.
 //
 @function ratio-gen ($numerator, $denominator) {
-	@if $ratio-style == "words" {
-		$numerator-name:   "";
-		$denominator-name: "";
-
-		// Numerator
-		@if      $numerator == 1  { $numerator-name: "one";      }
-		@else if $numerator == 2  { $numerator-name: "two";      }
-		@else if $numerator == 3  { $numerator-name: "three";    }
-		@else if $numerator == 4  { $numerator-name: "four";     }
-		@else if $numerator == 5  { $numerator-name: "five";     }
-		@else if $numerator == 6  { $numerator-name: "six";      }
-		@else if $numerator == 7  { $numerator-name: "seven";    }
-		@else if $numerator == 8  { $numerator-name: "eight";    }
-		@else if $numerator == 9  { $numerator-name: "nine";     }
-		@else if $numerator == 10 { $numerator-name: "ten";      }
-		@else if $numerator == 11 { $numerator-name: "eleven";   }
-		@else if $numerator == 12 { $numerator-name: "twelve";   }
-		@else if $numerator == 13 { $numerator-name: "thirteen"; }
-		@else if $numerator == 14 { $numerator-name: "fourteen"; }
-		@else if $numerator == 15 { $numerator-name: "fifteen";  }
-		@else {
-			@warn "Named numerator for `#{$numerator}` is not supported";
-			@return false;
-		}
-
-		// Denominator
-		@if      $denominator == 1  { $denominator-name: "whole";      }
-		@else if $denominator == 2  { $denominator-name: "half";       }
-		@else if $denominator == 3  { $denominator-name: "third";      }
-		@else if $denominator == 4  { $denominator-name: "quarter";    }
-		@else if $denominator == 5  { $denominator-name: "fifth";      }
-		@else if $denominator == 6  { $denominator-name: "sixth";      }
-		@else if $denominator == 7  { $denominator-name: "seventh";    }
-		@else if $denominator == 8  { $denominator-name: "eighth";     }
-		@else if $denominator == 9  { $denominator-name: "ninth";      }
-		@else if $denominator == 10 { $denominator-name: "tenth";      }
-		@else if $denominator == 11 { $denominator-name: "eleventh";   }
-		@else if $denominator == 12 { $denominator-name: "twelfth";    }
-		@else if $denominator == 13 { $denominator-name: "thirteenth"; }
-		@else if $denominator == 14 { $denominator-name: "fourteenth"; }
-		@else if $denominator == 15 { $denominator-name: "fifteenth";  }
-		@else if $denominator == 16 { $denominator-name: "sixteenth";  }
-		@else {
-			@warn "Named denominator for `#{$denominator}` is not supported";
-			@return false;
-		}
-
-		// Determine if a plural or not
-		@if $numerator > 1 {
-			@return $numerator-name +"-"+ $denominator-name +"s";
-		}
-
-		@return $numerator-name +"-"+ $denominator-name;
+	// Determine if a fraction or a whole
+	@if $denominator > 1 {
+		@return $numerator +"-"+ $denominator;
 	}
-	@else {
-		// Determine if a fraction or a whole
-		@if $denominator > 1 {
-			@return $numerator +"-"+ $denominator;
-		}
 
-		@return 1;
-	}
+	@return 1;
 }
 
 // FUNCTION split-fraction

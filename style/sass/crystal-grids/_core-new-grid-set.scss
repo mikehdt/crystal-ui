@@ -72,6 +72,8 @@
 		);
 	}
 
+	// ### Contemplating nuking some of these?
+
 	// Align modifiers - horizontal, vertical
 	@if map-get($breakpoint-set, "align-horizontal") {
 		@include grid-align("horizontal", map-get($breakpoint-set, "align-horizontal"), $class-breakpoint);
