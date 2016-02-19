@@ -4,16 +4,6 @@
 	@warn "No breakpoints have been configured. Grids cannot be generated.";
 }
 
-@if (not $name-grid-ratios and $ratio-style == "numbers") {
-	@warn "Both named ratios and named grid ratios are set to false. This will cause sadness.";
-}
-
-
-// Global Variables
-// ----------------
-$_generated:   () !global;
-$_gen-offset:  () !global;
-
 // Grid System Functions
 // ---------------------
 @import "functions-namespace";
@@ -24,28 +14,18 @@ $_gen-offset:  () !global;
 @import "core-new-grid-set";
 @import "core-new-grid";
 
-@import "grid-align";
 @import "grid-gutter";
-@import "grid-offsets";
 @import "grid-reversible";
 
-
-
-// MIXIN logic-type
-//
-// Determine whether or not we are applying it to a parent or child element.
-//
-@mixin logic-type ($context:"parent") {
-	@if $context == "parent" {
-		display: flex;
-		flex-wrap: wrap;
-	}
-}
-
+// Global Variables
+// ----------------
+$_cg_generated: () !global;
 
 // Base grid container and item classing
 // -------------------------------------
-#{class-gen($name-grid)},
+// There is a bug here in libsass where it wraps the first item with "" for some
+// reason. I don't know why. Hence the unquote()
+#{unquote(class-gen($name-grid))},
 #{class-gen($name-grid-item)} {
 	box-sizing: border-box;
 	vertical-align: top;
@@ -53,20 +33,15 @@ $_gen-offset:  () !global;
 
 // Generate grid items first
 #{class-gen($name-grid-item)} {
-	@include logic-type("child");
-
 	width: 100%;
 	margin-left:  0;
 	margin-right: 0;
-
-	// This is part of the magic to get inline blocks to behave
-	// This resets the font size on a child element
-	font-size: $grid-size-reset;
 }
 
 // So that they can be overridden later...
 #{class-gen($name-grid)} {
-	@include logic-type();
+	display: flex;
+	flex-wrap: wrap;
 
 	$default-gutter: map-get(map-get($crystal-grids, "default"), "gutter-width");
 
@@ -88,8 +63,6 @@ $_gen-offset:  () !global;
 
 	// Grids within grids
 	#{class-gen($name-grid, "> ")} {
-		@include logic-type("child");
-
 		margin-left:  0;
 		margin-right: 0;
 	}

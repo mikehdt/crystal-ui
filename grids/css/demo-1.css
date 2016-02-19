@@ -1,166 +1,154 @@
 @charset "UTF-8";
-/*! Crystal Grids 2.0.0-β21: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-ui/grids */
+/*! Crystal Grids 3.0.0-α1: A highly configurable and fun responsive grid system! http://github.com/mikehdt/crystal-grids */
 .grid,
 .col {
   box-sizing: border-box;
-  vertical-align: top; }
+  vertical-align: top;
+}
 
 .col {
-  display: inline-block;
   width: 100%;
   margin-left: 0;
   margin-right: 0;
-  font-size: 1.6rem; }
+}
 
 .grid {
-  display: block;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   margin-left: -2rem;
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
-  font-size: 0; }
-  .grid > .col {
-    padding-left: 2rem;
-    padding-right: 0; }
-  .grid > .grid {
-    display: inline-block;
-    margin-left: 0;
-    margin-right: 0; }
+  font-size: 0;
+}
+
+.grid > .col {
+  padding-left: 2rem;
+  padding-right: 0;
+}
+
+.grid > .grid {
+  margin-left: 0;
+  margin-right: 0;
+}
 
 /* === Grid: default === */
 .col-1 {
-  width: 100%; }
+  width: 100%;
+}
 
 .col-1-2 {
-  width: 50%; }
+  width: 50%;
+}
 
-.rev {
-  direction: rtl;
-  text-align: left; }
+.grid--rev {
+  -webkit-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
 
-.rev-reset {
-  direction: ltr;
-  text-align: left; }
-
-.gutter--clear {
+.grid--gutter-clear {
   margin-left: 0;
-  margin-right: 0; }
-  .gutter--clear > .col {
-    padding-left: 0;
-    padding-right: 0; }
+  margin-right: 0;
+}
 
-.gutter--equal {
+.grid--gutter-clear > .col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.grid--gutter-clear-small {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.grid--gutter-clear-small > .col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.grid--gutter-equal {
   margin-left: -1rem;
-  margin-right: -1rem; }
-  .gutter--equal > .col {
-    padding-left: 1rem;
-    padding-right: 1rem; }
+  margin-right: -1rem;
+}
 
-.gutter--offset {
+.grid--gutter-equal > .col {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.grid--gutter-equal-small {
+  margin-left: -0.5em;
+  margin-right: -0.5em;
+}
+
+.grid--gutter-equal-small > .col {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.grid--gutter-offset {
   margin-left: -2rem;
-  margin-right: 0; }
-  .gutter--offset > .col {
-    padding-left: 2rem;
-    padding-right: 0; }
+  margin-right: 0;
+}
 
-.align--bottom {
-  vertical-align: bottom; }
+.grid--gutter-offset > .col {
+  padding-left: 2rem;
+  padding-right: 0;
+}
+
+.grid--gutter-offset-small {
+  margin-left: -1em;
+  margin-right: 0;
+}
+
+.grid--gutter-offset-small > .col {
+  padding-left: 1em;
+  padding-right: 0;
+}
+
+.gutter--small {
+  margin-left: -1em;
+  margin-right: 0;
+}
+
+.gutter--small > .col {
+  padding-left: 1em;
+  padding-right: 0;
+}
 
 /* === Grid: s === */
 @media (min-width: 30em) {
+  .col-1--s {
+    width: 100%;
+  }
   .col-1-2--s {
-    width: 50%; }
+    width: 50%;
+  }
+}
 
-  .col-1-3--s {
-    width: 33.33333%; }
-
-  .col-2-3--s {
-    width: 66.66667%; } }
 /* === Grid: m === */
 @media (min-width: 45em) {
+  .col-1--m {
+    width: 100%;
+  }
   .col-1-2--m {
-    width: 50%; }
-
+    width: 50%;
+  }
   .col-1-3--m {
-    width: 33.33333%; }
+    width: 33.33333%;
+  }
+}
 
-  .col-2-3--m {
-    width: 66.66667%; }
-
-  .col-1-4--m {
-    width: 25%; }
-
-  .col-3-4--m {
-    width: 75%; }
-
-  .col-1-5--m {
-    width: 20%; }
-
-  .col-2-5--m {
-    width: 40%; }
-
-  .col-3-5--m {
-    width: 60%; }
-
-  .col-4-5--m {
-    width: 80%; }
-
-  /* --- Offset: push --- */
-  [class*="push--"] {
-    position: relative; }
-
-  .push--col-1-4--m {
-    margin-right: 25% !important; }
-
-  /* --- Offset: pull --- */
-  [class*="pull--"] {
-    position: relative; }
-
-  .pull--col-1-4--m {
-    margin-right: -25% !important; }
-
-  .pull--col-1-2--m {
-    margin-right: -50% !important; }
-
-  /* --- Offset: unshift --- */
-  [class*="unshift--"] {
-    position: relative; }
-
-  .unshift--col-1-4--m {
-    margin-left: 25% !important; }
-
-  /* --- Offset: shift --- */
-  [class*="shift--"] {
-    position: relative; }
-
-  .shift--col-1-4--m {
-    margin-left: -25% !important; }
-
-  /* --- Offset: left --- */
-  [class*="left--"] {
-    position: relative; }
-
-  .left--col-1-4--m {
-    left: 25% !important; }
-
-  .left--col-1-2--m {
-    left: 50% !important; }
-
-  /* --- Offset: right --- */
-  [class*="right--"] {
-    position: relative; }
-
-  .right--col-1-4--m {
-    right: 25% !important; } }
 /* === Grid: l === */
 @media (min-width: 60em) {
-  .col-1-2--l {
-    width: 50%; }
-
-  .col-1-3--l {
-    width: 33.33333%; }
-
-  .col-2-3--l {
-    width: 66.66667%; } }
+  .col-1--l {
+    width: 100%;
+  }
+}
 
 /*# sourceMappingURL=demo-1.css.map */

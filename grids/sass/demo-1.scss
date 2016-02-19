@@ -2,33 +2,28 @@ $crystal-grids: (
 	default: (
 		grids: (1, 2),
 
+		gutter-type:  offset,
 		gutter-width: 2rem,
-		gutter-extra-types: ("clear", "equal", "offset"),
 
-		align-vertical: ("bottom"),
+		gutter-extra-types:  (clear, equal, offset),
+		gutter-extra-widths: (small: 1em),
+
 		reversible: true
 	),
 
 	s: (
 		media: "(min-width: 30em)",
-		grids: (2, 3)
+		grids: (1, 2)
 	),
 
 	m: (
 		media: "(min-width: 45em)",
-		grids: (2, 3, 4, 5),
-
-		offset-left:    ("1/4", "1/2"),
-		offset-right:   ("1/4"),
-		offset-push:    ("1/4"),
-		offset-pull:    ("1/4", "1/2"),
-		offset-shift:   ("1/4"),
-		offset-unshift: ("1/4")
+		grids: (1, "1-2", "1/3") // You can use either type for fractions
 	),
 
 	l: (
 		media: "(min-width: 60em)",
-		grids: (2, 3)
+		grids: (1)
 	),
 );
 

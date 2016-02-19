@@ -18,19 +18,18 @@
 	@if $extra-gutter-types {
 		// Generate extra types
 		@each $type in $extra-gutter-types {
-			#{class-gen($prefix +"gutter--"+ $type + $suffix)} {
+			#{class-gen($prefix + $name-grid + "--gutter-"+ $type + $suffix)} {
 				@include grid-gutter-item($gutter-width, $type);
 			}
 
 			// Types and widths
 			// These are currently generated regardless of if you need them or not
 			// Not sure if adding another config option is a good thing...
-			@if $extra-gutter-widths
-			{
+			@if $extra-gutter-widths {
 				@each $width in $extra-gutter-widths {
-					$type-width: $type +"--"+ nth($width, 1);
+					$type-width: $type +"-"+ nth($width, 1);
 
-					#{class-gen($prefix +"gutter--"+ $type-width + $suffix)} {
+					#{class-gen($prefix + $name-grid + "--gutter-"+ $type-width + $suffix)} {
 						@include grid-gutter-item(nth($width, 2), $type);
 					}
 				}
@@ -53,13 +52,6 @@
 			}
 		}
 	}
-
-	// // Generate width variations if specified to do so
-	// @each $width in $extra-gutter-widths {
-	// 	#{class-gen($prefix +"gutter--"+ $type +"--fucking-hell"+ $suffix)} {
-	// 		@include grid-gutter-item($gutter-width * 2, $type);
-	// 	}
-	// }
 }
 
 
@@ -80,14 +72,6 @@
 		margin-left:  0;
 		margin-right: 0;
 	}
-
-	// Grids within grids --- @@@ necessary? Seems better covered by one top-level?
-	// #{class-gen($name-grid, "> ")} {
-	// 	@include logic-type("child");
-
-	// 	margin-left:  0;
-	// 	margin-right: 0;
-	// }
 
 	// Child grid items
 	#{class-gen($name-grid-item, "> ")} {

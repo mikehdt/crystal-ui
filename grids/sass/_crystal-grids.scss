@@ -38,21 +38,10 @@
 // Extra items are:
 //
 // gutter-type:  none|offset|equal - Default breakpoint guttering style
-// gutter-width: unit - Breakpoint guttering in rem or px
+// gutter-width: unit - Breakpoint guttering in em, rem or px
 //
 // gutter-extra-types:  (clear/equal/offset) - Generate extra gutter styles
 // gutter-extra-widths: (map) - Generate additional gutter widths
-//
-// align-horizontal: (left/center/right) - Generate text-alignment classes
-// align-vertical:   (top/middle/bottom) - Generate vertical-align classes
-//
-// offset-types:  (push/pull/in/out) - Generate classes  to swap/offset columns
-// offset-ratios: (units) Ratios to generate for all push/pull/in/out types
-//
-// offset-push:  (units) The ratios to generate just for the push offset
-// offset-pull:  (units) The ratios to generate just for the pull offset
-// offset-left:  (units) The ratios to generate just for the in offset
-// offset-right: (units) The ratios to generate just for the out offset
 //
 // reversible: true|false - Generate a reversible modifier, swaps whilst keeping source order
 
@@ -68,25 +57,13 @@
 //		gutter-extra-types:  (),
 //		gutter-extra-widths: (),
 //
-//		align-horizontal: (),
-//		align-vertical:   (),
-//
-//		offset-push:  (),
-//		offset-pull:  (),
-//		offset-left:  (),
-//		offset-right: (),
-//
 //		reversible: false
 //	)
 
 $crystal-grids: (
 	default: (
 		grids: (1, 2),
-
-		gutter-width: 2rem,
-
-		gutter-extra-types:  ("equal"),
-		gutter-extra-widths: ("wide": 4rem)
+		gutter-width: 2rem
 	),
 
 	s: (

@@ -3,7 +3,7 @@
 // Include breakpoint grid generation and determine whether to generate for
 // a whole set of grid items or just one ratio.
 //
-@mixin new-grid ($grids, $class-breakpoint:"", $type:"") {
+@mixin new-grid ($grids, $class-breakpoint:"", $prefix:"") {
 	// Iterate through each grid item
 	@each $ratio in $grids {
 		$item-ratio: null;
@@ -12,7 +12,7 @@
 			// Check if single-ratio, cast to string for comparison
 			$item-ratio: split-fraction($ratio);
 
-			@include new-grid-item($item-ratio, $class-breakpoint, $type);
+			@include new-grid-item($item-ratio, $class-breakpoint, $prefix);
 		}
 		@else {
 			// Generate a whole set of grid items based on the denominator
@@ -23,7 +23,7 @@
 						denominator: $ratio
 					);
 
-					@include new-grid-item($item-ratio, $class-breakpoint, $type);
+					@include new-grid-item($item-ratio, $class-breakpoint, $prefix);
 				}
 			}
 		}
@@ -39,13 +39,12 @@
 // ignore generating the class. If the option is disabled, it uses the global
 // variable to @extend the existing definition rather than define it again.
 //
-@mixin new-grid-item ($item-ratio, $class-breakpoint:"", $type:"") {
-	$numerator:   map-get($item-ratio, 'numerator');
-	$denominator: map-get($item-ratio, 'denominator');
+@mixin new-grid-item ($item-ratio, $class-breakpoint:"", $prefix:"") {
+	$numerator:   map-get($item-ratio, "numerator");
+	$denominator: map-get($item-ratio, "denominator");
 	$percentage:  percentage($numerator / $denominator);
 	$ratio:       ratio-gen($numerator, $denominator);
-	$prefix:      $type;
-	$suffix:      '';
+	$suffix:      "";
 
 	@if $breakpoint-position == "prefix" {
 		$prefix: $prefix + $class-breakpoint;
@@ -56,11 +55,11 @@
 
 	$new-class:   $prefix + namespace-gen() + $ratio + $suffix;
 	$new-ratio:   $prefix + $percentage + $suffix;
-	$existing:    map-has-key($_generated, $new-ratio);
+	$existing:    map-has-key($_cg_generated, $new-ratio);
 
 	@if not $existing {
 		// Not existing, so store the new values in the lookup list
-		$_generated: map_merge($_generated, ($new-ratio: $ratio)) !global;
+		$_cg_generated: map_merge($_cg_generated, ($new-ratio: $ratio)) !global;
 	}
 
 	// Although it may seem that you could combine these two sets of statements,
@@ -70,12 +69,12 @@
 		.#{$new-class} {
 			@if $existing and not $ignore-duplicates {
 				// Extend the existing class
-				$class-name: $prefix + namespace-gen() + map-get($_generated, $new-ratio) + $suffix;
+				$class-name: $prefix + namespace-gen() + map-get($_cg_generated, $new-ratio) + $suffix;
 				@extend .#{$class-name};
 			}
 			@else if not $existing {
 				// Include the data for the class
-				@include grid-item-data($percentage, $type);
+				width: $percentage;
 			}
 		}
 	}
@@ -85,7 +84,7 @@
 			// Avoid over-generating classes for both static and silent enabled
 			@if $existing and $use-static-classes and not $ignore-duplicates {
 				// Extend the existing static class
-				$class-name: $prefix + namespace-gen() + map-get($_generated, $new-ratio) + $suffix;
+				$class-name: $prefix + namespace-gen() + map-get($_cg_generated, $new-ratio) + $suffix;
 				@extend .#{$class-name};
 			}
 			@else if not $existing {
@@ -96,38 +95,9 @@
 				}
 				@else {
 					// This is truly a new silent class name
-					@include grid-item-data($percentage, $type);
+					width: $percentage;
 				}
 			}
 		}
-	}
-}
-
-
-// MIXIN grid-item-data
-//
-// The core logic for the new-grid-item mixin, this does double duty as both
-// normal grids (width) or offset modifiers (push, pull etc).
-//
-@mixin grid-item-data ($percentage, $type:"") {
-	@if $type == "" {
-		// Create a new class value and store the new values
-		width: $percentage;
-	}
-	@else {
-		// Drop relative positioning into silent classes which can't take
-		// advantage of the `[class*="push--"]` style selectors
-		@if $use-silent-classes {
-			position: relative;
-		}
-
-		// Tread lightly with !important... here it's necessary to override
-		// grid within grids which have an offset
-		@if      ($type ==  "unshift--") { margin-left:   $percentage !important; }
-		@else if ($type ==    "shift--") { margin-left:  -$percentage !important; }
-		@else if ($type ==     "push--") { margin-right:  $percentage !important; }
-		@else if ($type ==     "pull--") { margin-right: -$percentage !important; }
-		@else if ($type ==     "left--") { left:          $percentage !important; }
-		@else if ($type ==    "right--") { right:         $percentage !important; }
 	}
 }
