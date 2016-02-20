@@ -15,6 +15,6 @@
 	}
 
 	#{class-gen($prefix + $name-grid + "--rev"+ $suffix)} {
-		flex-direction: column-reverse;
+		flex-direction: row-reverse;
 	}
 }
