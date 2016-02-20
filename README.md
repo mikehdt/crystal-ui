@@ -110,7 +110,7 @@ Crystal has the option to reverse a set of grids; this means that the order you 
 
     </div>
 
-This is handy if you want to lay out your page a certain way visually but it would be advantageous to order the source differently, for example to aid accessibility (getting a screenreader to read more important content first). With flexbox, this is achieved by changing the flex-direction property to row-reverse.
+This is handy if you want to lay out your page a certain way visually but it would be advantageous to order the source differently, for example to aid accessibility (getting a screenreader to read more important content first). With flexbox, this is achieved by changing the `flex-direction` property to `row-reverse`.
 
 ### Grids and Gutters
 
@@ -120,8 +120,8 @@ Note that if you use a custom gutter style at a lower breakpoint and then change
 
 ### Grid alignment
 
-As flexbox has many ways to affect alignment, version 3 of Crystal Grids currently leaves this up to the author to implement outside of the core Crystal logic.
+As flexbox has many ways to affect alignment, version 3.0 of Crystal Grids currently leaves this up to the author to implement outside of the core Crystal logic.
 
 ### Credits
 
-Crystal Grids was written by Mike Hopkins, originally based on the amazing work done by Harry Roberts of CSS Wizardry. The core of version 1.0 was originally based on CSS Wizardry Grids. Version 2.0 has been almost entirely rewritten since then, but still retains the principal idea of working with inline blocks. I am grateful for and respect the work that he has released.
+Crystal Grids was written by Mike Hopkins, originally based on the amazing work done by Harry Roberts of CSS Wizardry. The core of version 1.0 was originally based on CSS Wizardry Grids. I am grateful for and respect the work that he has released. Version 2.0 has been entirely rewritten since then, but still retains the principal idea of working with inline blocks. Version 3.0 has droppped flex, inline-blocks and the more edge-case logic in favour of flexbox and leaving things up to the author.
