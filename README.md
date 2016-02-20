@@ -124,4 +124,4 @@ As flexbox has many ways to affect alignment, version 3.0 of Crystal Grids curre
 
 ### Credits
 
-Crystal Grids was written by Mike Hopkins, originally based on the amazing work done by Harry Roberts of CSS Wizardry. The core of version 1.0 was originally based on CSS Wizardry Grids. I am grateful for and respect the work that he has released. Version 2.0 has been entirely rewritten since then, but still retains the principal idea of working with inline blocks. Version 3.0 has droppped flex, inline-blocks and the more edge-case logic in favour of flexbox and leaving things up to the author.
+Crystal Grids was written by Mike Hopkins, originally based on the amazing work done by Harry Roberts of CSS Wizardry. The core of version 1.0 was originally based on CSS Wizardry Grids. I am grateful for and respect the work that he has released. Version 2.0 has been entirely rewritten since then, but still retains the principal idea of working with inline blocks. Version 3.0 has droppped floats, inline-blocks and the more edge-case logic in favour of flexbox and leaving things up to the author.
