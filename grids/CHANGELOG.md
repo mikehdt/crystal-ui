@@ -47,3 +47,8 @@
 * **2.0.0β22** Tiny update
     * Set globals on the global variables which track settings
     * Dropped support for the Android AOSP imprecision hack
+
+* **3.0.0α1** Flexbox
+    * Drop older logic in favour of flexbox
+    * Remove some of the less commonly used properties for now
+    * Tidy up logic, drop some configuration items that made things more complex than need be
