@@ -2,37 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parallax is Fun</title>
 </head>
 <style>
 html, body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 .overflow {
-	overflow: hidden;
+    overflow: hidden;
 }
 img {
-	width: 100%;
-	height: auto;
+    width: 100%;
+    height: auto;
 }
 p {
-	text-align: center;
+    text-align: center;
 }
 .parallax {
-	will-change: transform;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 </style>
 <body>
 
 <div class="overflow">
-	<img src="img.png" class="parallax  parallax-img">
+    <img src="img.png" class="parallax  parallax-img">
 </div>
 
 <p>&ndash;</p>
-<p>A <em>relatively</em> performant parallax effect :)</p>
+<!-- <p>A <em>relatively</em> performant parallax effect :)</p> -->
 <p>&ndash;</p>
 <p>&ndash;</p>
+
+<div class="overflow">
+    <img src="img.png" class="parallax  parallax-img">
+</div>
+
 <p>&ndash;</p>
 <p>&ndash;</p>
 <p>&ndash;</p>
