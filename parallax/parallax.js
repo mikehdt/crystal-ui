@@ -46,7 +46,12 @@ var Parallax = (function(){
     }
 
     function setParallaxPosition () {
-        // Older config... need to reimplement this...
+        // At the moment, this setup kind of works best for items at the top of
+        // the window on first page load. Instead, need to consider a way to
+        // "crop" images, and then use that as a multiplier for their movement.
+        // Also since this has been rewritten, Safari no longer works, but it's
+        // a trololo browser at the moment, so *shrug*.
+        // These two are part of the older config... need to reimplement...
         let parallaxRatio    = 0.7,
             parallaxDivision = 16;
 
