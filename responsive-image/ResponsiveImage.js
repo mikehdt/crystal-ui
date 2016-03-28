@@ -4,7 +4,7 @@
 
 "use strict";
 
-// Responsive Image script v1.0.0 by @mikehdt
+// Responsive Image script v1.0.1 by @mikehdt
 // Written with ES2015 bits and pieces, so make sure you use a transpiler such
 // as Babel if required...
 //
@@ -50,7 +50,7 @@ class ResponsiveImage {
         // 1. Ratio between 0 -> 1 of how much a lower-res image is allowed to
         //    scale before it decides to grab a higher res one
         this.elements = document.querySelectorAll(selector);
-        this.lowerThreshold = lowerThreshold || 0.2; // [1]
+        this.lowerThreshold = (typeof lowerThreshold !== 'undefined') ? lowerThreshold : 0.2; // [1]
         this.isRetinaDisplay = this.isRetinaDisplay();
 
         // If you intialise two RI classes, this will be doubled; consider a
